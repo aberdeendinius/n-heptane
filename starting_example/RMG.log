@@ -1,0 +1,147 @@
+Global RMG Settings:
+   test_data.directory  = /Users/abby/Code/RMG-Py/rmgpy/test_data (Default, relative to RMG-Py source code)
+   database.directory   = /Users/abby/Code/RMG-database/input (Default, relative to RMG-Py source code)
+RMG execution initiated at Thu May 23 11:09:27 2019
+
+#########################################################
+# RMG-Py - Reaction Mechanism Generator in Python       #
+# Version: 2.3.0                                        #
+# Authors: RMG Developers (rmg_dev@mit.edu)             #
+# P.I.s:   William H. Green (whgreen@mit.edu)           #
+#          Richard H. West (r.west@neu.edu)             #
+# Website: http://reactionmechanismgenerator.github.io/ #
+#########################################################
+
+The current git HEAD for RMG-Py is:
+	cb77e288623c2f4697b248b6e6fc4c93a356fe8b
+	Wed May 22 10:38:24 2019 -0400
+
+The current git HEAD for RMG-database is:
+	a5fbbab905d45a0d9779740f8e26b0d6e4a2464c
+	Tue Mar 27 14:50:28 2018 -0400
+
+Reading input file "/Users/abby/Code/RMG-Py/examples/rmg/n-heptane/starting_example.ipynb"...
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "NameError",
+     "evalue": "name 'database' is not defined",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-1-62bbda67f3ac>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;31m# Data sources\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m database(\n\u001b[0m\u001b[1;32m      3\u001b[0m     \u001b[0mthermoLibraries\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;34m'primaryThermoLibrary'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m     \u001b[0mreactionLibraries\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m     \u001b[0mseedMechanisms\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mNameError\u001b[0m: name 'database' is not defined"
+     ]
+    }
+   ],
+   "source": [
+    "# Data sources\n",
+    "database(\n",
+    "    thermoLibraries = ['primaryThermoLibrary'],\n",
+    "    reactionLibraries = [],\n",
+    "    seedMechanisms = [],\n",
+    "    kineticsDepositories = ['training'], \n",
+    "    kineticsFamilies = 'default',\n",
+    "    kineticsEstimator = 'rate rules',\n",
+    ")\n",
+    "\n",
+    "# Constraints on generated species\n",
+    "generatedSpeciesConstraints(\n",
+    "    maximumCarbonAtoms = 7,\n",
+    ")\n",
+    "\n",
+    "# List of species\n",
+    "species(\n",
+    "    label='n-heptane',\n",
+    "    structure=SMILES(\"CCCCCCC\"),\n",
+    ")\n",
+    "\n",
+    "species(\n",
+    "    label='Ar',\n",
+    "    reactive=False,\n",
+    "    structure=SMILES(\"[Ar]\"),\n",
+    ")\n",
+    "\n",
+    "\n",
+    "simpleReactor(\n",
+    "    temperature=(1600,'K'),\n",
+    "    pressure=(400,'Pa'),\n",
+    "    initialMoleFractions={\n",
+    "        \"n-heptane\": 0.02,\n",
+    "        \"Ar\": 0.98,\n",
+    "    },\n",
+    "    terminationConversion={\n",
+    "        'n-heptane': 0.99,\n",
+    "    },\n",
+    "    terminationTime=(1e6,'s'),\n",
+    ")\n",
+    "\n",
+    "simpleReactor(\n",
+    "    temperature=(2000,'K'),\n",
+    "    pressure=(400,'Pa'),\n",
+    "    initialMoleFractions={\n",
+    "        \"n-heptane\": 0.02,\n",
+    "        \"Ar\": 0.98,\n",
+    "    },\n",
+    "    terminationConversion={\n",
+    "        'n-heptane': 0.99,\n",
+    "    },\n",
+    "    terminationTime=(1e6,'s'),\n",
+    ")\n",
+    "\n",
+    "#absolute and relative tolerance for ODE solver, atol usually 1e-15 - 1e-25, rtol 1e-4 - 1e-8\n",
+    "simulator(\n",
+    "    atol=1e-16,\n",
+    "    rtol=1e-8,\n",
+    ")\n",
+    "\n",
+    "#tolerancemovetocore is how high edge flux ratio of species must reach before entering core model\n",
+    "#toleranceInterruptSimulation how high edge flux ratio to interrupt sim, set equal to tolerancemove to core\n",
+    "model(\n",
+    "    toleranceMoveToCore=0.1,\n",
+    "    toleranceInterruptSimulation=0.1\n",
+    ")\n",
+    "\n",
+    "# generates k(T, P) interpolation model\n",
+    "#wo methods available: 'modified strong collision' is faster and less accurate than 'reservoir state'\n",
+    "pressureDependence(\n",
+    "    method='modified strong collision',\n",
+    "    maximumGrainSize=(0.5,'kcal/mol'),\n",
+    "    minimumNumberOfGrains=250,\n",
+    "    temperatures=(300,3000,'K',8),\n",
+    "    pressures=(0.001,100,'bar',5),\n",
+    "    interpolation=('Chebyshev', 6, 4),\n",
+    ")\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.16"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
+
+

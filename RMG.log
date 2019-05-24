@@ -1,0 +1,24 @@
+Global RMG Settings:
+   test_data.directory  = /Users/abby/Code/RMG-Py/rmgpy/test_data (Default, relative to RMG-Py source code)
+   database.directory   = /Users/abby/Code/RMG-database/input (Default, relative to RMG-Py source code)
+RMG execution initiated at Fri May 24 09:49:17 2019
+
+#########################################################
+# RMG-Py - Reaction Mechanism Generator in Python       #
+# Version: 2.3.0                                        #
+# Authors: RMG Developers (rmg_dev@mit.edu)             #
+# P.I.s:   William H. Green (whgreen@mit.edu)           #
+#          Richard H. West (r.west@neu.edu)             #
+# Website: http://reactionmechanismgenerator.github.io/ #
+#########################################################
+
+The current git HEAD for RMG-Py is:
+	cb77e288623c2f4697b248b6e6fc4c93a356fe8b
+	Wed May 22 10:38:24 2019 -0400
+
+The current git HEAD for RMG-database is:
+	a5fbbab905d45a0d9779740f8e26b0d6e4a2464c
+	Tue Mar 27 14:50:28 2018 -0400
+
+Error: The input file "/Users/abby/Code/RMG-Py/examples/rmg/n-heptane/test.py" could not be opened.
+Check that the file exists and that you have read access.
