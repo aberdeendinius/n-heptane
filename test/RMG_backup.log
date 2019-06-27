@@ -1,7 +1,7 @@
 Global RMG Settings:
    test_data.directory  = /Users/abby/Code/RMG-Py/rmgpy/test_data (Default, relative to RMG-Py source code)
    database.directory   = /Users/abby/Code/RMG-database/input (Default, relative to RMG-Py source code)
-RMG execution initiated at Fri May 24 09:50:46 2019
+RMG execution initiated at Thu Jun  6 11:31:04 2019
 
 #########################################################
 # RMG-Py - Reaction Mechanism Generator in Python       #
@@ -17,90 +17,8 @@ The current git HEAD for RMG-Py is:
 	Wed May 22 10:38:24 2019 -0400
 
 The current git HEAD for RMG-database is:
-	a5fbbab905d45a0d9779740f8e26b0d6e4a2464c
-	Tue Mar 27 14:50:28 2018 -0400
+	949490d282053a7036f73a1ed4540b8dc4dc7ae9
+	Mon May 6 13:47:10 2019 -0400
 
-Reading input file "/Users/abby/Code/RMG-Py/examples/rmg/n-heptane/test/test.py"...
-# Data sources
-database(
-    thermoLibraries = ['primaryThermoLibrary'],
-    reactionLibraries = [],
-    seedMechanisms = [],
-    kineticsDepositories = ['training'], 
-    kineticsFamilies = 'default',
-    kineticsEstimator = 'rate rules',
-)
-
-# Constraints on generated species
-generatedSpeciesConstraints(
-    maximumCarbonAtoms = 7,
-)
-
-# List of species
-species(
-    label='n-heptane',
-    structure=SMILES("CCCCCCC"),
-)
-
-species(
-    label='Ar',
-    reactive=False,
-    structure=SMILES("[Ar]"),
-)
-
-
-simpleReactor(
-    temperature=(1600,'K'),
-    pressure=(400,'Pa'),
-    initialMoleFractions={
-        "n-heptane": 0.02,
-        "Ar": 0.98,
-    },
-    terminationConversion={
-        'n-heptane': 0.99,
-    },
-    terminationTime=(1e6,'s'),
-)
-
-simpleReactor(
-    temperature=(2000,'K'),
-    pressure=(400,'Pa'),
-    initialMoleFractions={
-        "n-heptane": 0.02,
-        "Ar": 0.98,
-    },
-    terminationConversion={
-        'n-heptane': 0.99,
-    },
-    terminationTime=(1e6,'s'),
-)
-
-#absolute and relative tolerance for ODE solver, atol usually 1e-15 - 1e-25, rtol 1e-4 - 1e-8
-simulator(
-    atol=1e-16,
-    rtol=1e-8,
-)
-
-#tolerancemovetocore is how high edge flux ratio of species must reach before entering core model
-#toleranceInterruptSimulation how high edge flux ratio to interrupt sim, set equal to tolerancemove to core
-model(
-    toleranceMoveToCore=0.1,
-    toleranceInterruptSimulation=0.1
-)
-
-# generates k(T, P) interpolation model
-#wo methods available: 'modified strong collision' is faster and less accurate than 'reservoir state'
-pressureDependence(
-    method='modified strong collision',
-    maximumGrainSize=(0.5,'kcal/mol'),
-    minimumNumberOfGrains=250,
-    temperatures=(300,3000,'K',8),
-    pressures=(0.001,100,'bar',5),
-    interpolation=('Chebyshev', 6, 4),
-)
-
-
-1600 K
-2000 K
-Loading thermodynamics library from primaryThermoLibrary.py in /Users/abby/Code/RMG-database/input/thermo/libraries...
-Loading thermodynamics group database from /Users/abby/Code/RMG-database/input/thermo/groups...
+Error: The input file "/Users/abby/Code/RMG-Py/examples/rmg/n-heptane/test" could not be opened.
+Check that the file exists and that you have read access.

@@ -54,20 +54,6 @@ species(
 )
 
 species(
-    label = 'CH2(T)(26)',
-    structure = SMILES('[CH2]'),
-    E0 = (381.37,'kJ/mol'),
-    modes = [
-        HarmonicOscillator(frequencies=([1066.91,2790.99,3622.37],'cm^-1')),
-    ],
-    spinMultiplicity = 3,
-    opticalIsomers = 1,
-    molecularWeight = (14.0266,'amu'),
-    energyTransferModel = SingleExponentialDown(alpha0=(3.5886,'kJ/mol'), T0=(300,'K'), n=0.85),
-    thermo = NASA(polynomials=[NASAPolynomial(coeffs=[4.01192,-0.000154979,3.26298e-06,-2.40422e-09,5.69497e-13,45867.7,0.5332], Tmin=(100,'K'), Tmax=(1104.58,'K')), NASAPolynomial(coeffs=[3.14983,0.00296674,-9.76056e-07,1.54115e-10,-9.50338e-15,46058.1,4.77808], Tmin=(1104.58,'K'), Tmax=(5000,'K'))], Tmin=(100,'K'), Tmax=(5000,'K'), E0=(381.37,'kJ/mol'), Cp0=(33.2579,'J/(mol*K)'), CpInf=(58.2013,'J/(mol*K)'), label="""CH2(T)""", comment="""Thermo library: primaryThermoLibrary"""),
-)
-
-species(
     label = '[CH3](10)',
     structure = SMILES('[CH3]'),
     E0 = (135.382,'kJ/mol'),
@@ -79,6 +65,20 @@ species(
     molecularWeight = (15.0345,'amu'),
     energyTransferModel = SingleExponentialDown(alpha0=(3.5886,'kJ/mol'), T0=(300,'K'), n=0.85),
     thermo = NASA(polynomials=[NASAPolynomial(coeffs=[3.91547,0.00184154,3.48742e-06,-3.32748e-09,8.49957e-13,16285.6,0.351741], Tmin=(100,'K'), Tmax=(1337.63,'K')), NASAPolynomial(coeffs=[3.54146,0.00476787,-1.82148e-06,3.28877e-10,-2.22546e-14,16224,1.66035], Tmin=(1337.63,'K'), Tmax=(5000,'K'))], Tmin=(100,'K'), Tmax=(5000,'K'), E0=(135.382,'kJ/mol'), Cp0=(33.2579,'J/(mol*K)'), CpInf=(108.088,'J/(mol*K)'), comment="""Thermo library: primaryThermoLibrary + radical(CH3)"""),
+)
+
+species(
+    label = 'CH2(T)(26)',
+    structure = SMILES('[CH2]'),
+    E0 = (381.37,'kJ/mol'),
+    modes = [
+        HarmonicOscillator(frequencies=([1066.91,2790.99,3622.37],'cm^-1')),
+    ],
+    spinMultiplicity = 3,
+    opticalIsomers = 1,
+    molecularWeight = (14.0266,'amu'),
+    energyTransferModel = SingleExponentialDown(alpha0=(3.5886,'kJ/mol'), T0=(300,'K'), n=0.85),
+    thermo = NASA(polynomials=[NASAPolynomial(coeffs=[4.01192,-0.000154979,3.26298e-06,-2.40422e-09,5.69497e-13,45867.7,0.5332], Tmin=(100,'K'), Tmax=(1104.58,'K')), NASAPolynomial(coeffs=[3.14983,0.00296674,-9.76056e-07,1.54115e-10,-9.50338e-15,46058.1,4.77808], Tmin=(1104.58,'K'), Tmax=(5000,'K'))], Tmin=(100,'K'), Tmax=(5000,'K'), E0=(381.37,'kJ/mol'), Cp0=(33.2579,'J/(mol*K)'), CpInf=(58.2013,'J/(mol*K)'), label="""CH2(T)""", comment="""Thermo library: primaryThermoLibrary"""),
 )
 
 species(
@@ -196,7 +196,7 @@ Ea raised from -1.4 to 0 kJ/mol."""),
 
 reaction(
     label = 'reaction3',
-    reactants = ['CH2(T)(26)', '[CH3](10)'],
+    reactants = ['[CH3](10)', 'CH2(T)(26)'],
     products = ['C[CH2](5)'],
     transitionState = 'TS3',
     kinetics = Arrhenius(A=(1.14854e+06,'m^3/(mol*s)'), n=0.575199, Ea=(34.3157,'kJ/mol'), T0=(1,'K'), comment="""Estimated using template [Y_rad;Birad] for rate rule [C_methyl;Birad]

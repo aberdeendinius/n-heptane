@@ -10,13 +10,10 @@ C2H5(5)             2     252.301     4.302     0.000     0.000     1.500    ! G
 C4H9(2)             2     357.002     5.176     0.000     0.000     1.000    ! GRI-Mech
 C3H7(3)             2     266.801     4.982     0.000     0.000     1.000    ! GRI-Mech
 CH3(10)             2     144.001     3.800     0.000     0.000     0.000    ! GRI-Mech
-C6H13(9)            2     385.187     6.051     0.000     0.000     0.000    ! Epsilon & sigma estimated with Tc=500.24 K, Pc=32.8 bar (from Joback method)
 C2H4(16)            2     280.801     3.971     0.000     0.000     1.500    ! GRI-Mech
-C6H13(44)           2     385.187     6.051     0.000     0.000     0.000    ! Epsilon & sigma estimated with Tc=500.24 K, Pc=32.8 bar (from Joback method)
 H(7)                0     145.000     2.050     0.000     0.000     0.000    ! GRI-Mech
-C3H6(37)            2     266.801     4.982     0.000     0.000     1.000    ! GRI-Mech
-H2(65)              1      38.000     2.920     0.000     0.790   280.000    ! GRI-Mech
-C2H3(52)            2     209.001     4.100     0.000     0.000     1.000    ! GRI-Mech
-C#C(139)            1     209.001     4.100     0.000     0.000     2.500    ! GRI-Mech
-C3H5(66)            2     260.001     4.850     0.000     0.000     1.000    ! GRI-Mech
+H2(49)              1      38.000     2.920     0.000     0.790   280.000    ! GRI-Mech
+C2H3(43)            2     209.001     4.100     0.000     0.000     1.000    ! GRI-Mech
+C#C(50)             1     209.001     4.100     0.000     0.000     2.500    ! GRI-Mech
+C3H6(85)            2     237.100     5.118     0.000     0.000     0.000    ! Epsilon & sigma estimated with fixed Lennard Jones Parameters. This is the fallback method! Try improving transport databases!
 CH4(42)             2     141.400     3.746     0.000     2.600    13.000    ! GRI-Mech

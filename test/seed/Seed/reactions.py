@@ -13,12 +13,12 @@ entry(
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
-            [12.6772, 0.336741, -0.0651281, -0.00483623],
-            [-0.838314, 0.627148, -0.115508, -0.0110775],
-            [-0.514498, 0.503856, -0.0776446, -0.0139453],
-            [-0.340716, 0.34302, -0.0320719, -0.0154121],
-            [-0.204475, 0.189524, 0.00524477, -0.0135639],
-            [-0.104032, 0.0758554, 0.0251275, -0.00899615],
+            [12.6794, 0.334746, -0.0650807, -0.00485413],
+            [-0.834771, 0.624245, -0.115723, -0.0110653],
+            [-0.512951, 0.503497, -0.0784844, -0.0138722],
+            [-0.341251, 0.345086, -0.0332269, -0.0154198],
+            [-0.206239, 0.192637, 0.00444714, -0.0138394],
+            [-0.105927, 0.0785052, 0.0251269, -0.00957977],
         ],
         kunits = 'cm^3/(mol*s)',
         Tmin = (300, 'K'),
@@ -34,12 +34,12 @@ entry(
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
-            [12.6859, 0.331369, -0.0667487, -0.00486234],
-            [-0.820828, 0.615846, -0.118407, -0.0111872],
-            [-0.496814, 0.491533, -0.0798305, -0.01414],
-            [-0.323722, 0.330587, -0.033809, -0.0155543],
-            [-0.189651, 0.178775, 0.00336133, -0.0134613],
-            [-0.0926796, 0.0682386, 0.022809, -0.00859108],
+            [12.6876, 0.329742, -0.0666834, -0.00486988],
+            [-0.818095, 0.613481, -0.118542, -0.0111615],
+            [-0.495679, 0.491235, -0.0805031, -0.0140599],
+            [-0.324216, 0.332216, -0.034759, -0.0155322],
+            [-0.191049, 0.181168, 0.00269881, -0.0136447],
+            [-0.0941005, 0.0701749, 0.022801, -0.00901167],
         ],
         kunits = 'cm^3/(mol*s)',
         Tmin = (300, 'K'),
@@ -51,16 +51,16 @@ entry(
 
 entry(
     index = 2,
-    label = "[CH2]CCCCC + [CH3] <=> n-heptane",
+    label = "[CH2]CC + C=C <=> [CH2]CCCC",
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
-            [13.2356, 0.313514, -0.0672299, -0.00472533],
-            [-0.717336, 0.586456, -0.120994, -0.0107107],
-            [-0.45808, 0.477401, -0.0857783, -0.0134538],
-            [-0.309267, 0.33229, -0.0416927, -0.0153932],
-            [-0.188517, 0.189752, -0.00306403, -0.0147609],
-            [-0.096881, 0.0802323, 0.0203146, -0.011536],
+            [7.85863, 0.659208, -0.111075, -0.00538984],
+            [1.74986, 1.07175, -0.138014, -0.0230552],
+            [-0.33094, 0.560335, 0.011403, -0.0318535],
+            [-0.183732, 0.157422, 0.0837324, -0.0143256],
+            [-0.0733543, -0.00340313, 0.0666536, 0.00902683],
+            [-0.0412829, -0.0162751, 0.0277111, 0.0156223],
         ],
         kunits = 'cm^3/(mol*s)',
         Tmin = (300, 'K'),
@@ -72,16 +72,16 @@ entry(
 
 entry(
     index = 3,
-    label = "[CH2]CC + C=C <=> [CH2]CCCC",
+    label = "C[CH2] + C=C <=> [CH2]CCC",
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
-            [7.86935, 0.648478, -0.109731, -0.00548686],
-            [1.76026, 1.065, -0.140078, -0.022183],
-            [-0.336935, 0.572306, 0.00689247, -0.0317477],
-            [-0.19389, 0.169173, 0.0847152, -0.016257],
-            [-0.0789729, -0.000947322, 0.0716256, 0.00787541],
-            [-0.0427937, -0.0184408, 0.0309402, 0.0167569],
+            [7.80035, 0.703483, -0.111795, -0.00406301],
+            [1.6666, 1.11778, -0.125937, -0.0243252],
+            [-0.35907, 0.54721, 0.0301732, -0.0316564],
+            [-0.180173, 0.126137, 0.0888182, -0.00829409],
+            [-0.0620818, -0.0255138, 0.0590128, 0.0148081],
+            [-0.0327347, -0.0260898, 0.0184143, 0.0166701],
         ],
         kunits = 'cm^3/(mol*s)',
         Tmin = (300, 'K'),
@@ -93,28 +93,7 @@ entry(
 
 entry(
     index = 4,
-    label = "C[CH2] + C=C <=> [CH2]CCC",
-    degeneracy = 1.0,
-    kinetics = Chebyshev(
-        coeffs = [
-            [7.81156, 0.69221, -0.109739, -0.00465306],
-            [1.67596, 1.11318, -0.12876, -0.0232941],
-            [-0.365775, 0.5602, 0.0253625, -0.0314443],
-            [-0.189099, 0.135373, 0.0908401, -0.0102222],
-            [-0.0667628, -0.0250616, 0.0641054, 0.0142054],
-            [-0.0347289, -0.0279957, 0.020816, 0.0181754],
-        ],
-        kunits = 'cm^3/(mol*s)',
-        Tmin = (300, 'K'),
-        Tmax = (3000, 'K'),
-        Pmin = (0.001, 'bar'),
-        Pmax = (100, 'bar'),
-    ),
-)
-
-entry(
-    index = 5,
-    label = "C=C + [CH3] <=> [CH2]CC",
+    label = "[CH3] + C=C <=> [CH2]CC",
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
@@ -134,49 +113,7 @@ entry(
 )
 
 entry(
-    index = 6,
-    label = "C=C + [CH2]CCC <=> [CH2]CCCCC",
-    degeneracy = 1.0,
-    kinetics = Chebyshev(
-        coeffs = [
-            [7.87897, 0.63993, -0.11003, -0.00499113],
-            [1.78051, 1.04557, -0.13922, -0.0213641],
-            [-0.322489, 0.559416, 0.00637905, -0.0304851],
-            [-0.196362, 0.177421, 0.079337, -0.015371],
-            [-0.0951972, 0.0217108, 0.0667468, 0.00616002],
-            [-0.0585011, -0.00151851, 0.0327067, 0.0133964],
-        ],
-        kunits = 'cm^3/(mol*s)',
-        Tmin = (300, 'K'),
-        Tmax = (3000, 'K'),
-        Pmin = (0.001, 'bar'),
-        Pmax = (100, 'bar'),
-    ),
-)
-
-entry(
-    index = 7,
-    label = "[CH2]CCCCC <=> C[CH]CCCC",
-    degeneracy = 1.0,
-    kinetics = Chebyshev(
-        coeffs = [
-            [5.02329, 0.621765, -0.13615, 0.0138056],
-            [3.45026, 0.971453, -0.142374, -0.0145306],
-            [-0.415704, 0.528916, 0.024216, -0.0447415],
-            [-0.299199, 0.239627, 0.0754504, -0.0264143],
-            [-0.182851, 0.090743, 0.0610979, -0.000367978],
-            [-0.090893, 0.00736564, 0.0400402, 0.0123369],
-        ],
-        kunits = 's^-1',
-        Tmin = (300, 'K'),
-        Tmax = (3000, 'K'),
-        Pmin = (0.001, 'bar'),
-        Pmax = (100, 'bar'),
-    ),
-)
-
-entry(
-    index = 8,
+    index = 5,
     label = "H + C=C <=> C[CH2]",
     degeneracy = 1.0,
     kinetics = Chebyshev(
@@ -197,49 +134,7 @@ entry(
 )
 
 entry(
-    index = 9,
-    label = "H + C=CC <=> [CH2]CC",
-    degeneracy = 1.0,
-    kinetics = Chebyshev(
-        coeffs = [
-            [11.3821, 0.700157, -0.110597, 0.00383533],
-            [0.273132, 1.05481, -0.0960364, -0.0226315],
-            [-0.431867, 0.497182, 0.0357138, -0.0248718],
-            [-0.202092, 0.128958, 0.0582336, -0.00170726],
-            [-0.0535996, -0.0126798, 0.0274238, 0.00961808],
-            [0.00263066, -0.0319155, 0.0016392, 0.00589933],
-        ],
-        kunits = 'cm^3/(mol*s)',
-        Tmin = (300, 'K'),
-        Tmax = (3000, 'K'),
-        Pmin = (0.001, 'bar'),
-        Pmax = (100, 'bar'),
-    ),
-)
-
-entry(
-    index = 10,
-    label = "[CH2]CC + C=CC <=> C[CH]CCCC",
-    degeneracy = 1.0,
-    kinetics = Chebyshev(
-        coeffs = [
-            [7.72916, 0.618567, -0.108735, -0.0049975],
-            [1.70736, 1.03094, -0.144626, -0.0204242],
-            [-0.327316, 0.582965, -0.00379714, -0.0315123],
-            [-0.209257, 0.200263, 0.0798442, -0.0199717],
-            [-0.0973392, 0.0227583, 0.0764174, 0.00333875],
-            [-0.0529894, -0.0105225, 0.0394524, 0.0154092],
-        ],
-        kunits = 'cm^3/(mol*s)',
-        Tmin = (300, 'K'),
-        Tmax = (3000, 'K'),
-        Pmin = (0.001, 'bar'),
-        Pmax = (100, 'bar'),
-    ),
-)
-
-entry(
-    index = 11,
+    index = 6,
     label = "C[CH2] + H <=> H2 + C=C",
     degeneracy = 3.0,
     kinetics = Arrhenius(
@@ -260,28 +155,7 @@ family: Disproportionation
 )
 
 entry(
-    index = 12,
-    label = "[CH2]CC + H <=> H2 + C=CC",
-    degeneracy = 2.0,
-    kinetics = Arrhenius(
-        A = (3.62e+12, 'cm^3/(mol*s)', '*|/', 2),
-        n = 0,
-        Ea = (0, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (2500, 'K'),
-        comment = 'Matched reaction 18 H + C3H7-2 <=> H2 + C3H6-2 in Disproportionation/training\nThis reaction matched rate rule [H_rad;C/H2/Nd_Csrad]\nfamily: Disproportionation',
-    ),
-    longDesc = 
-u"""
-Matched reaction 18 H + C3H7-2 <=> H2 + C3H6-2 in Disproportionation/training
-This reaction matched rate rule [H_rad;C/H2/Nd_Csrad]
-family: Disproportionation
-""",
-)
-
-entry(
-    index = 13,
+    index = 7,
     label = "H + H <=> H2",
     degeneracy = 1.0,
     kinetics = Chebyshev(
@@ -302,7 +176,7 @@ entry(
 )
 
 entry(
-    index = 14,
+    index = 8,
     label = "[CH3] + [CH3] <=> C[CH2] + H",
     degeneracy = 1.0,
     kinetics = Chebyshev(
@@ -323,8 +197,8 @@ entry(
 )
 
 entry(
-    index = 15,
-    label = "[CH]=C + C[CH2] <=> C=C + C=C",
+    index = 9,
+    label = "C[CH2] + [CH]=C <=> C=C + C=C",
     degeneracy = 3.0,
     kinetics = Arrhenius(
         A = (4.56e+14, 'cm^3/(mol*s)', '*|/', 1.5),
@@ -344,8 +218,8 @@ family: Disproportionation
 )
 
 entry(
-    index = 16,
-    label = "[CH]=C + H <=> C=C",
+    index = 10,
+    label = "H + [CH]=C <=> C=C",
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
@@ -365,7 +239,7 @@ entry(
 )
 
 entry(
-    index = 17,
+    index = 11,
     label = "H + C=C <=> H2 + [CH]=C",
     degeneracy = 4.0,
     kinetics = Arrhenius(
@@ -384,50 +258,8 @@ family: H_Abstraction
 )
 
 entry(
-    index = 18,
-    label = "[CH]=C + [CH2]CC <=> C=C + C=CC",
-    degeneracy = 2.0,
-    kinetics = Arrhenius(
-        A = (2.42e+12, 'cm^3/(mol*s)', '*|/', 3),
-        n = 0,
-        Ea = (0, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (2500, 'K'),
-        comment = 'Matched reaction 29 C2H3-2 + C3H7-2 <=> C2H4-2 + C3H6-2 in Disproportionation/training\nThis reaction matched rate rule [Cd_pri_rad;C/H2/Nd_Csrad]\nfamily: Disproportionation',
-    ),
-    longDesc = 
-u"""
-Matched reaction 29 C2H3-2 + C3H7-2 <=> C2H4-2 + C3H6-2 in Disproportionation/training
-This reaction matched rate rule [Cd_pri_rad;C/H2/Nd_Csrad]
-family: Disproportionation
-""",
-)
-
-entry(
-    index = 19,
-    label = "[CH]=C + [CH3] <=> C=CC",
-    degeneracy = 1.0,
-    kinetics = Chebyshev(
-        coeffs = [
-            [13.3769, 0.47235, -0.079496, 0.00501147],
-            [-0.855775, 0.798623, -0.104362, -0.00426043],
-            [-0.619332, 0.501586, -0.0151419, -0.0175193],
-            [-0.384308, 0.239772, 0.0330734, -0.0126085],
-            [-0.213563, 0.0836469, 0.0357242, -0.000973748],
-            [-0.109418, 0.0149711, 0.0203492, 0.00542963],
-        ],
-        kunits = 'cm^3/(mol*s)',
-        Tmin = (300, 'K'),
-        Tmax = (3000, 'K'),
-        Pmin = (0.001, 'bar'),
-        Pmax = (100, 'bar'),
-    ),
-)
-
-entry(
-    index = 20,
-    label = "[CH]=C + H <=> C#C + H2",
+    index = 12,
+    label = "H + [CH]=C <=> H2 + C#C",
     degeneracy = 2.0,
     kinetics = Arrhenius(
         A = (678.823, 'm^3/(mol*s)'),
@@ -446,7 +278,7 @@ family: Disproportionation
 )
 
 entry(
-    index = 21,
+    index = 13,
     label = "[CH]=C + [CH]=C <=> C#C + C=C",
     degeneracy = 2.0,
     kinetics = Arrhenius(
@@ -466,8 +298,8 @@ family: Disproportionation
 )
 
 entry(
-    index = 22,
-    label = "C#C + H <=> [CH]=C",
+    index = 14,
+    label = "H + C#C <=> [CH]=C",
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
@@ -487,80 +319,17 @@ entry(
 )
 
 entry(
-    index = 23,
-    label = "[CH2]C=C + C[CH2] <=> C=C + C=CC",
-    degeneracy = 6.0,
-    kinetics = Arrhenius(
-        A = (1.374e+14, 'cm^3/(mol*s)', '*|/', 3),
-        n = -0.35,
-        Ea = (-0.54392, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (2500, 'K'),
-        comment = 'Matched reaction 7 C3H5 + C2H5 <=> C3H6 + C2H4 in Disproportionation/training\nThis reaction matched rate rule [C_rad/H2/Cd;Cmethyl_Csrad]\nfamily: Disproportionation',
-    ),
-    longDesc = 
-u"""
-Matched reaction 7 C3H5 + C2H5 <=> C3H6 + C2H4 in Disproportionation/training
-This reaction matched rate rule [C_rad/H2/Cd;Cmethyl_Csrad]
-family: Disproportionation
-""",
-)
-
-entry(
-    index = 24,
-    label = "H + C=CC <=> H2 + [CH2]C=C",
-    degeneracy = 3.0,
-    kinetics = Arrhenius(
-        A = (3360, 'cm^3/(mol*s)'),
-        n = 3.14,
-        Ea = (17.9494, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (2000, 'K'),
-        comment = 'Matched reaction 756 H + C3H6 <=> H2 + C3H5 in H_Abstraction/training\nThis reaction matched rate rule [C/H3/Cd\\H_Cd\\H2;H_rad]\nfamily: H_Abstraction',
-    ),
-    longDesc = 
-u"""
-Matched reaction 756 H + C3H6 <=> H2 + C3H5 in H_Abstraction/training
-This reaction matched rate rule [C/H3/Cd\H_Cd\H2;H_rad]
-family: H_Abstraction
-""",
-)
-
-entry(
-    index = 25,
-    label = "[CH2]C=C + [CH2]CC <=> C=CC + C=CC",
-    degeneracy = 4.0,
-    kinetics = Arrhenius(
-        A = (5.8e+12, 'cm^3/(mol*s)', '*|/', 3),
-        n = 0,
-        Ea = (-0.54392, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (2500, 'K'),
-        comment = 'Matched reaction 23 C3H5 + C3H7-2 <=> C3H6 + C3H6-2 in Disproportionation/training\nThis reaction matched rate rule [C_rad/H2/Cd;C/H2/Nd_Csrad]\nfamily: Disproportionation',
-    ),
-    longDesc = 
-u"""
-Matched reaction 23 C3H5 + C3H7-2 <=> C3H6 + C3H6-2 in Disproportionation/training
-This reaction matched rate rule [C_rad/H2/Cd;C/H2/Nd_Csrad]
-family: Disproportionation
-""",
-)
-
-entry(
-    index = 26,
-    label = "[CH2]C=C + H <=> C=CC",
+    index = 15,
+    label = "[CH3] + [CH]=C <=> C[C]C",
     degeneracy = 1.0,
     kinetics = Chebyshev(
         coeffs = [
-            [13.8519, 0.38444, -0.0650493, 0.00192969],
-            [-0.560301, 0.67783, -0.0996374, -0.00289942],
-            [-0.491174, 0.465191, -0.0375569, -0.0120915],
-            [-0.31566, 0.245827, 0.00965443, -0.0119313],
-            [-0.170135, 0.0933017, 0.0246641, -0.00451701],
-            [-0.0774622, 0.0163834, 0.0187631, 0.00216088],
+            [13.1059, -0.795513, -0.304824, -0.0173715],
+            [0.636937, 0.739171, 0.232452, -0.0272429],
+            [0.110094, 0.151089, 0.100881, 0.0330977],
+            [-0.0271784, -0.0320691, 0.00657427, 0.0203392],
+            [-0.0329557, -0.0465254, -0.0202097, 0.000487281],
+            [-0.0146196, -0.0224537, -0.0153807, -0.00644185],
         ],
         kunits = 'cm^3/(mol*s)',
         Tmin = (300, 'K'),
@@ -571,49 +340,8 @@ entry(
 )
 
 entry(
-    index = 27,
-    label = "[CH]=C + C=CC <=> [CH2]C=C + C=C",
-    degeneracy = 3.0,
-    kinetics = Arrhenius(
-        A = (0.00666, 'cm^3/(mol*s)'),
-        n = 4.34,
-        Ea = (0.4184, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (1500, 'K'),
-        comment = 'Matched reaction 1013 C2H3 + C3H6 <=> C2H4 + C3H5 in H_Abstraction/training\nThis reaction matched rate rule [C/H3/Cd\\H_Cd\\H2;Cd_Cd\\H2_pri_rad]\nfamily: H_Abstraction',
-    ),
-    longDesc = 
-u"""
-Matched reaction 1013 C2H3 + C3H6 <=> C2H4 + C3H5 in H_Abstraction/training
-This reaction matched rate rule [C/H3/Cd\H_Cd\H2;Cd_Cd\H2_pri_rad]
-family: H_Abstraction
-""",
-)
-
-entry(
-    index = 28,
-    label = "[CH2]C=C + [CH]=C <=> C#C + C=CC",
-    degeneracy = 4.0,
-    kinetics = Arrhenius(
-        A = (16.4093, 'm^3/(mol*s)'),
-        n = 1.87713,
-        Ea = (-4.66621, 'kJ/mol'),
-        T0 = (1, 'K'),
-        comment = 'Estimated using template [Y_rad;Cds/H2_d_Rrad] for rate rule [C_rad/H2/Cd;Cds/H2_d_Crad]\nEuclidian distance = 3.16227766017\nMultiplied by reaction path degeneracy 4.0\nfamily: Disproportionation',
-    ),
-    longDesc = 
-u"""
-Estimated using template [Y_rad;Cds/H2_d_Rrad] for rate rule [C_rad/H2/Cd;Cds/H2_d_Crad]
-Euclidian distance = 3.16227766017
-Multiplied by reaction path degeneracy 4.0
-family: Disproportionation
-""",
-)
-
-entry(
-    index = 29,
-    label = "C[CH2] + [CH3] <=> C=C + CH4",
+    index = 16,
+    label = "C[CH2] + [CH3] <=> CH4 + C=C",
     degeneracy = 3.0,
     kinetics = Arrhenius(
         A = (6.57e+14, 'cm^3/(mol*s)', '*|/', 1.1),
@@ -633,29 +361,8 @@ family: Disproportionation
 )
 
 entry(
-    index = 30,
-    label = "[CH2]CC + [CH3] <=> CH4 + C=CC",
-    degeneracy = 2.0,
-    kinetics = Arrhenius(
-        A = (2.3e+13, 'cm^3/(mol*s)', '*|/', 1.7),
-        n = -0.32,
-        Ea = (0, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (2500, 'K'),
-        comment = 'Matched reaction 20 CH3 + C3H7-2 <=> CH4 + C3H6-2 in Disproportionation/training\nThis reaction matched rate rule [C_methyl;C/H2/Nd_Csrad]\nfamily: Disproportionation',
-    ),
-    longDesc = 
-u"""
-Matched reaction 20 CH3 + C3H7-2 <=> CH4 + C3H6-2 in Disproportionation/training
-This reaction matched rate rule [C_methyl;C/H2/Nd_Csrad]
-family: Disproportionation
-""",
-)
-
-entry(
-    index = 31,
-    label = "[CH]=C + CH4 <=> C=C + [CH3]",
+    index = 17,
+    label = "[CH]=C + CH4 <=> [CH3] + C=C",
     degeneracy = 4.0,
     kinetics = Arrhenius(
         A = (0.02236, 'cm^3/(mol*s)'),
@@ -675,28 +382,7 @@ family: H_Abstraction
 )
 
 entry(
-    index = 32,
-    label = "C=CC + [CH3] <=> [CH2]C=C + CH4",
-    degeneracy = 3.0,
-    kinetics = Arrhenius(
-        A = (0.072, 'cm^3/(mol*s)'),
-        n = 4.25,
-        Ea = (31.5055, 'kJ/mol'),
-        T0 = (1, 'K'),
-        Tmin = (300, 'K'),
-        Tmax = (2000, 'K'),
-        comment = 'Matched reaction 758 CH3_r3 + C3H6 <=> CH4b + C3H5 in H_Abstraction/training\nThis reaction matched rate rule [C/H3/Cd\\H_Cd\\H2;C_methyl]\nfamily: H_Abstraction',
-    ),
-    longDesc = 
-u"""
-Matched reaction 758 CH3_r3 + C3H6 <=> CH4b + C3H5 in H_Abstraction/training
-This reaction matched rate rule [C/H3/Cd\H_Cd\H2;C_methyl]
-family: H_Abstraction
-""",
-)
-
-entry(
-    index = 33,
+    index = 18,
     label = "H + [CH3] <=> CH4",
     degeneracy = 1.0,
     kinetics = Chebyshev(
@@ -717,8 +403,8 @@ entry(
 )
 
 entry(
-    index = 34,
-    label = "H + CH4 <=> H2 + [CH3]",
+    index = 19,
+    label = "H + CH4 <=> [CH3] + H2",
     degeneracy = 4.0,
     kinetics = Arrhenius(
         A = (4100, 'cm^3/(mol*s)'),
@@ -736,8 +422,8 @@ family: H_Abstraction
 )
 
 entry(
-    index = 35,
-    label = "[CH]=C + [CH3] <=> C#C + CH4",
+    index = 20,
+    label = "[CH3] + [CH]=C <=> CH4 + C#C",
     degeneracy = 2.0,
     kinetics = Arrhenius(
         A = (8.20464, 'm^3/(mol*s)'),
@@ -753,26 +439,5 @@ Euclidian distance = 2.2360679775
 Multiplied by reaction path degeneracy 2.0
 family: Disproportionation
 """,
-)
-
-entry(
-    index = 36,
-    label = "[CH2]C=C + [CH3] <=> [CH]=C + C[CH2]",
-    degeneracy = 1.0,
-    kinetics = Chebyshev(
-        coeffs = [
-            [3.0775, -1.36111, -0.228271, 0.0474395],
-            [7.76766, 1.1225, 0.0654777, -0.0727916],
-            [-0.453162, 0.359806, 0.136042, -0.0127575],
-            [-0.333455, 0.00577321, 0.0614866, 0.0239428],
-            [-0.183454, -0.0789737, -0.00435277, 0.0174969],
-            [-0.0712476, -0.0562833, -0.024419, 0.00164152],
-        ],
-        kunits = 'cm^3/(mol*s)',
-        Tmin = (300, 'K'),
-        Tmax = (3000, 'K'),
-        Pmin = (0.001, 'bar'),
-        Pmax = (100, 'bar'),
-    ),
 )
 
