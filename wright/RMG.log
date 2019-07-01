@@ -1,0 +1,81 @@
+Global RMG Settings:
+   test_data.directory  = /home/dinius.ab/Code/RMG-Py/rmgpy/test_data (Default, relative to RMG-Py source code)
+   database.directory   = /home/dinius.ab/Code/RMG-database/input (Default, relative to RMG-Py source code)
+RMG execution initiated at Fri Jun 28 11:09:24 2019
+
+#########################################################
+# RMG-Py - Reaction Mechanism Generator in Python       #
+# Version: 2.4.0                                        #
+# Authors: RMG Developers (rmg_dev@mit.edu)             #
+# P.I.s:   William H. Green (whgreen@mit.edu)           #
+#          Richard H. West (r.west@neu.edu)             #
+# Website: http://reactionmechanismgenerator.github.io/ #
+#########################################################
+
+The current git HEAD for RMG-Py is:
+	4fab5868d04dfe606f41dc39eb1985988cbf5431
+	Tue Jun 25 14:50:21 2019 -0400
+
+The current git HEAD for RMG-database is:
+	a3c960c9116608a4a168bb2b890b296439d91b98
+	Mon Jun 17 16:32:25 2019 -0400
+
+Reading input file "/home/dinius.ab/Code/n-heptane/wright/wright2009.py"...
+#!bin/python
+#wright auto-ignition of n-heptane in closed combustion chamber
+# Data sources
+database(
+    thermoLibraries = ['primaryThermoLibrary'],
+    reactionLibraries = [],
+    seedMechanisms = [],
+    kineticsDepositories = ['training'], 
+    kineticsFamilies = 'default',
+    kineticsEstimator = 'rate rules',
+)
+
+# Constraints on generated species
+generatedSpeciesConstraints(
+    maximumCarbonAtoms = 7,
+)
+
+# List of species
+species(
+    label='n-heptane',
+    structure=SMILES("CCCCCCC"),
+)
+
+simpleReactor(
+    pressure=(80,'bar'),
+    temperature=(673, 'K'),
+    initialMoleFractions={
+        "n-heptane": 1.0,
+    },
+    terminationTime=(1e6,'s'),
+)
+
+#absolute and relative tolerance for ODE solver, atol usually 1e-15 - 1e-25, rtol 1e-4 - 1e-8
+simulator(
+    atol=1e-16,
+    rtol=1e-8,
+)
+
+#tolerancemovetocore is how high edge flux ratio of species must reach before entering core model
+#toleranceInterruptSimulation how high edge flux ratio to interrupt sim, set equal to tolerancemove to core
+model(
+    toleranceMoveToCore=0.1,
+    toleranceInterruptSimulation=0.1
+)
+
+# generates k(T, P) interpolation model
+#wo methods available: 'modified strong collision' is faster and less accurate than 'reservoir state'
+pressureDependence(
+    method='modified strong collision',
+    maximumGrainSize=(0.5,'kcal/mol'),
+    minimumNumberOfGrains=250,
+    temperatures=(650,800,'K',10),
+    pressures=(70,250,'bar',10),
+    interpolation=('Chebyshev', 6, 4),
+)
+
+
+673 K

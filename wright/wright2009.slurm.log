@@ -1,0 +1,13 @@
+Using Theano backend.
+Traceback (most recent call last):
+  File "/home/dinius.ab/Code/RMG-Py/rmg.py", line 181, in <module>
+    main()
+  File "/home/dinius.ab/Code/RMG-Py/rmg.py", line 175, in main
+    rmg.execute(**kwargs)
+  File "/home/dinius.ab/Code/RMG-Py/rmgpy/rmg/main.py", line 624, in execute
+    self.initialize(**kwargs)
+  File "/home/dinius.ab/Code/RMG-Py/rmgpy/rmg/main.py", line 445, in initialize
+    self.checkInput()
+  File "/home/dinius.ab/Code/RMG-Py/rmgpy/rmg/main.py", line 294, in checkInput
+    "Pressure Dependence calculations require at least one inert (nonreacting) species for the bath gas."
+AssertionError: Pressure Dependence calculations require at least one inert (nonreacting) species for the bath gas.

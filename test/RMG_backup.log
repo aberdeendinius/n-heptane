@@ -1,7 +1,7 @@
 Global RMG Settings:
    test_data.directory  = /Users/abby/Code/RMG-Py/rmgpy/test_data (Default, relative to RMG-Py source code)
    database.directory   = /Users/abby/Code/RMG-database/input (Default, relative to RMG-Py source code)
-RMG execution initiated at Thu Jun  6 11:31:04 2019
+RMG execution initiated at Thu Jun  6 11:31:35 2019
 
 #########################################################
 # RMG-Py - Reaction Mechanism Generator in Python       #
@@ -20,5 +20,2898 @@ The current git HEAD for RMG-database is:
 	949490d282053a7036f73a1ed4540b8dc4dc7ae9
 	Mon May 6 13:47:10 2019 -0400
 
-Error: The input file "/Users/abby/Code/RMG-Py/examples/rmg/n-heptane/test" could not be opened.
-Check that the file exists and that you have read access.
+Reading input file "/Users/abby/Code/RMG-Py/examples/rmg/n-heptane/test/test.py"...
+# Data sources
+database(
+    thermoLibraries = ['primaryThermoLibrary'],
+    reactionLibraries = [],
+    seedMechanisms = [],
+    kineticsDepositories = ['training'], 
+    kineticsFamilies = 'default',
+    kineticsEstimator = 'rate rules',
+)
+
+# Constraints on generated species
+generatedSpeciesConstraints(
+    maximumCarbonAtoms = 7,
+)
+
+# List of species
+species(
+    label='n-heptane',
+    structure=SMILES("CCCCCCC"),
+)
+
+species(
+    label='Ar',
+    reactive=False,
+    structure=SMILES("[Ar]"),
+)
+
+
+simpleReactor(
+    temperature=(1600,'K'),
+    pressure=(400,'Pa'),
+    initialMoleFractions={
+        "n-heptane": 0.02,
+        "Ar": 0.98,
+    },
+    terminationConversion={
+        'n-heptane': 0.99,
+    },
+    terminationTime=(1e6,'s'),
+)
+
+simpleReactor(
+    temperature=(2000,'K'),
+    pressure=(400,'Pa'),
+    initialMoleFractions={
+        "n-heptane": 0.02,
+        "Ar": 0.98,
+    },
+    terminationConversion={
+        'n-heptane': 0.99,
+    },
+    terminationTime=(1e6,'s'),
+)
+
+#absolute and relative tolerance for ODE solver, atol usually 1e-15 - 1e-25, rtol 1e-4 - 1e-8
+simulator(
+    atol=1e-16,
+    rtol=1e-8,
+)
+
+#tolerancemovetocore is how high edge flux ratio of species must reach before entering core model
+#toleranceInterruptSimulation how high edge flux ratio to interrupt sim, set equal to tolerancemove to core
+model(
+    toleranceMoveToCore=0.1,
+    toleranceInterruptSimulation=0.1
+)
+
+# generates k(T, P) interpolation model
+#wo methods available: 'modified strong collision' is faster and less accurate than 'reservoir state'
+pressureDependence(
+    method='modified strong collision',
+    maximumGrainSize=(0.5,'kcal/mol'),
+    minimumNumberOfGrains=250,
+    temperatures=(300,3000,'K',8),
+    pressures=(0.001,100,'bar',5),
+    interpolation=('Chebyshev', 6, 4),
+)
+
+
+1600 K
+2000 K
+Loading thermodynamics library from primaryThermoLibrary.py in /Users/abby/Code/RMG-database/input/thermo/libraries...
+Loading thermodynamics group database from /Users/abby/Code/RMG-database/input/thermo/groups...
+Loading transport library from GRI-Mech.py in /Users/abby/Code/RMG-database/input/transport/libraries...
+Loading transport library from NOx2018.py in /Users/abby/Code/RMG-database/input/transport/libraries...
+Loading transport library from OneDMinN2.py in /Users/abby/Code/RMG-database/input/transport/libraries...
+Loading transport library from PrimaryTransportLibrary.py in /Users/abby/Code/RMG-database/input/transport/libraries...
+Loading transport group database from /Users/abby/Code/RMG-database/input/transport/groups...
+Loading frequencies group database from /Users/abby/Code/RMG-database/input/statmech/groups...
+Loading Platts additivity group database from /Users/abby/Code/RMG-database/input/solvation/groups...
+Adding rate rules from training set in kinetics families...
+Warning: Cphigh is above the theoretical CpInf value for ThermoData object
+ThermoData(Tdata=([300,400,500,600,800,1000,1500],'K'), Cpdata=([36.6869,38.2195,39.253,40.4473,45.0357,50.6323,54.2027],'J/(mol*K)'), H298=(310.047,'kJ/mol'), S298=(162.808,'J/(mol*K)'), Cp0=(29.1007,'J/(mol*K)'), CpInf=(37.4151,'J/(mol*K)'), comment="""Thermo group additivity estimation: group(O2s-CsCs) + group(CsJ2_singlet-CsH)""").
+The thermo for this species is probably wrong! Setting CpInf = Cphigh for Entropy calculationat T = 2000.0 K...
+Warning: Cphigh is above the theoretical CpInf value for ThermoData object
+ThermoData(Tdata=([300,400,500,600,800,1000,1500],'K'), Cpdata=([36.6869,38.2195,39.253,40.4473,45.0357,50.6323,54.2027],'J/(mol*K)'), H298=(310.047,'kJ/mol'), S298=(162.808,'J/(mol*K)'), Cp0=(29.1007,'J/(mol*K)'), CpInf=(37.4151,'J/(mol*K)'), comment="""Thermo group additivity estimation: group(O2s-CsCs) + group(CsJ2_singlet-CsH)""").
+The thermo for this species is probably wrong! Setting CpInf = Cphigh for Entropy calculationat T = 1666.66666667 K...
+Warning: Cphigh is above the theoretical CpInf value for ThermoData object
+ThermoData(Tdata=([300,400,500,600,800,1000,1500],'K'), Cpdata=([36.6869,38.2195,39.253,40.4473,45.0357,50.6323,54.2027],'J/(mol*K)'), H298=(310.047,'kJ/mol'), S298=(162.808,'J/(mol*K)'), Cp0=(29.1007,'J/(mol*K)'), CpInf=(37.4151,'J/(mol*K)'), comment="""Thermo group additivity estimation: group(O2s-CsCs) + group(CsJ2_singlet-CsH)""").
+The thermo for this species is probably wrong! Setting CpInf = Cphigh for Entropy calculationat T = 2000.0 K...
+Warning: Cphigh is above the theoretical CpInf value for ThermoData object
+ThermoData(Tdata=([300,400,500,600,800,1000,1500],'K'), Cpdata=([36.6869,38.2195,39.253,40.4473,45.0357,50.6323,54.2027],'J/(mol*K)'), H298=(310.047,'kJ/mol'), S298=(162.808,'J/(mol*K)'), Cp0=(29.1007,'J/(mol*K)'), CpInf=(37.4151,'J/(mol*K)'), comment="""Thermo group additivity estimation: group(O2s-CsCs) + group(CsJ2_singlet-CsH)""").
+The thermo for this species is probably wrong! Setting CpInf = Cphigh for Entropy calculationat T = 1666.66666667 K...
+Filling in rate rules in kinetics families by averaging...
+NOT generating reactions for unreactive species Ar
+Updating 0 modified unimolecular reaction networks (out of 0)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    Ar
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 1 species and 0 reactions
+    The model edge has 1 species and 0 reactions
+
+
+NOT generating reactions for unreactive species He
+Updating 0 modified unimolecular reaction networks (out of 0)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    He
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 2 species and 0 reactions
+    The model edge has 1 species and 0 reactions
+
+
+NOT generating reactions for unreactive species Ne
+Updating 0 modified unimolecular reaction networks (out of 0)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    Ne
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 3 species and 0 reactions
+    The model edge has 1 species and 0 reactions
+
+
+NOT generating reactions for unreactive species N2
+Updating 0 modified unimolecular reaction networks (out of 0)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    N2
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 4 species and 0 reactions
+    The model edge has 1 species and 0 reactions
+
+
+Adding species n-heptane(1) to model core
+Updating 0 modified unimolecular reaction networks (out of 0)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    n-heptane(1)
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 5 species and 0 reactions
+    The model edge has 0 species and 0 reactions
+
+
+Initialization complete. Starting model generation.
+
+Generating initial reactions...
+Species with SMILES of [H] named H based on thermo library name
+Species with SMILES of [CH2] named CH2(S) based on thermo library name
+Generating kinetics for new reactions...
+For reaction [CH2]CC(3) + [CH2]CCC(2) <=> n-heptane(1) Ea raised from -0.0 to 0 kJ/mol.
+For reaction [CH2]CCCC(4) + C[CH2](5) <=> n-heptane(1) Ea raised from -0.0 to 0 kJ/mol.
+For reaction H(7) + [CH2]CCCCCC(12) <=> n-heptane(1) Ea raised from -3.3 to 0 kJ/mol.
+For reaction CH2(S)(13) + CCCCCC(14) <=> n-heptane(1) Ea raised from -1.5 to 0 kJ/mol.
+For reaction CH2(S)(13) + CCCCCC(14) <=> n-heptane(1) Ea raised from -5.1 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 1)...
+Updating PDepNetwork #1
+Warning: Maximum number of iterations reached when fitting spectral data for CCCCCCC.
+Warning: Maximum number of iterations reached when fitting spectral data for [CH2]CCC.
+Warning: Maximum number of iterations reached when fitting spectral data for [CH2]CCCC.
+Warning: For C[CH2], more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (2 frequencies) to compensate.
+Warning: Maximum number of iterations reached when fitting spectral data for CC[CH]CCCC.
+Warning: Maximum number of iterations reached when fitting spectral data for CCC[CH]CCC.
+Warning: Maximum number of iterations reached when fitting spectral data for [CH2]CCCCC.
+Warning: Statmech node 'C_R1' and all its parents have data = None
+Warning: Maximum number of iterations reached when fitting spectral data for [CH3].
+Warning: Maximum number of iterations reached when fitting spectral data for C[CH]CCCCC.
+Warning: Maximum number of iterations reached when fitting spectral data for [CH2]CCCCCC.
+Warning: Statmech node 'C_R0' and all its parents have data = None
+Warning: Maximum number of iterations reached when fitting spectral data for CCCCCC.
+========================================================================
+1 network information
+---------------------
+Isomers:
+    n-heptane(1)                                         -215.645 kJ/mol
+Reactant channels:
+Product channels:
+    [CH2]CC(3) + [CH2]CCC(2)                              145.665 kJ/mol
+    [CH2]CCCC(4) + C[CH2](5)                              145.689 kJ/mol
+    CC[CH]CCCC(6) + H(7)                                  190.618 kJ/mol
+    CCC[CH]CCC(8) + H(7)                                  190.618 kJ/mol
+    [CH2]CCCCC(9) + [CH3](10)                             148.763 kJ/mol
+    H(7) + C[CH]CCCCC(11)                                 190.606 kJ/mol
+    H(7) + [CH2]CCCCCC(12)                                201.406 kJ/mol
+    CH2(S)(13) + CCCCCC(14)                               227.226 kJ/mol
+Path reactions:
+    [CH2]CC(3) + [CH2]CCC(2) <=> n-heptane(1)             145.665 kJ/mol
+    [CH2]CCCC(4) + C[CH2](5) <=> n-heptane(1)             145.689 kJ/mol
+    CC[CH]CCCC(6) + H(7) <=> n-heptane(1)                 190.618 kJ/mol
+    CCC[CH]CCC(8) + H(7) <=> n-heptane(1)                 190.618 kJ/mol
+    [CH2]CCCCC(9) + [CH3](10) <=> n-heptane(1)            148.849 kJ/mol
+    H(7) + C[CH]CCCCC(11) <=> n-heptane(1)                190.606 kJ/mol
+    H(7) + [CH2]CCCCCC(12) <=> n-heptane(1)               201.406 kJ/mol
+    CH2(S)(13) + CCCCCC(14) <=> n-heptane(1)              227.226 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 1 network...
+Using 690 grains from -215.65 to 1225.74 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for CH2(S)(13) + CCCCCC(14) <=> n-heptane(1)...
+Using 261 grains from -215.65 to 328.28 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 265 grains from -215.65 to 336.64 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 273 grains from -215.65 to 353.38 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 288 grains from -215.65 to 384.76 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 316 grains from -215.65 to 443.34 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 372 grains from -215.65 to 560.49 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 484 grains from -215.65 to 794.79 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 652 grains from -215.65 to 1146.25 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 13 new edge species
+    [CH2]CC(3)
+    [CH2]CCC(2)
+    [CH2]CCCC(4)
+    C[CH2](5)
+    CC[CH]CCCC(6)
+    H(7)
+    CCC[CH]CCC(8)
+    [CH2]CCCCC(9)
+    [CH3](10)
+    C[CH]CCCCC(11)
+    [CH2]CCCCCC(12)
+    CH2(S)(13)
+    CCCCCC(14)
+Added 0 new core reactions
+Created 8 new edge reactions
+    n-heptane(1) => [CH2]CC(3) + [CH2]CCC(2)
+    n-heptane(1) => [CH2]CCCC(4) + C[CH2](5)
+    n-heptane(1) => CC[CH]CCCC(6) + H(7)
+    n-heptane(1) => CCC[CH]CCC(8) + H(7)
+    n-heptane(1) => [CH2]CCCCC(9) + [CH3](10)
+    n-heptane(1) => H(7) + C[CH]CCCCC(11)
+    n-heptane(1) => H(7) + [CH2]CCCCCC(12)
+    n-heptane(1) => CH2(S)(13) + CCCCCC(14)
+
+After model enlargement:
+    The model core has 5 species and 0 reactions
+    The model edge has 13 species and 8 reactions
+
+
+Completed initial enlarge edge step.
+
+Saving current model core to Chemkin file...
+Chemkin file contains 0 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 0 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:02:28
+    Memory used: 623.78 MB
+
+Making seed mechanism...
+Beginning model generation stage 1...
+
+Conducting simulation of reaction system 1...
+At time 0.0000e+00 s, species [CH2]CCCC(4) was added to model core to avoid singularity
+Making seed mechanism...
+
+
+Adding species [CH2]CCCC(4) to model core
+Updating 0 modified unimolecular reaction networks (out of 1)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    [CH2]CCCC(4)
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 6 species and 0 reactions
+    The model edge has 12 species and 8 reactions
+
+
+Species with SMILES of [CH2] named CH2(T) based on thermo library name
+Generating kinetics for new reactions...
+For reaction C[CH2](5) + [CH2]C[CH2](19) <=> [CH2]CCCC(4) Ea raised from -0.0 to 0 kJ/mol.
+For reaction H(7) + [CH2][CH]CCC(24) <=> [CH2]CCCC(4) Ea raised from -1.4 to 0 kJ/mol.
+For reaction H(7) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) Ea raised from -3.3 to 0 kJ/mol.
+For reaction CH2(S)(13) + [CH2]CCC(2) <=> [CH2]CCCC(4) Ea raised from -1.5 to 0 kJ/mol.
+For reaction CH2(S)(13) + [CH2]CCC(2) <=> [CH2]CCCC(4) Ea raised from -5.1 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 2)...
+Updating PDepNetwork #2
+Warning: For [CH2][CH2], more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (2 frequencies) to compensate.
+Warning: Statmech node 'C_R2' and all its parents have data = None
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+Warning: Maximum number of iterations reached when fitting spectral data for [CH]CCCC.
+========================================================================
+2 network information
+---------------------
+Isomers:
+    [CH2]CCCC(4)                                          37.1621 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + C=CCCC(15)                                     171.503 kJ/mol
+    [CH2]CC(3) + C=C(16)                                  126.872 kJ/mol
+    C[CH]CCC(17)                                           26.362 kJ/mol
+    CC[CH]CC(18)                                           26.374 kJ/mol
+    C[CH2](5) + [CH2]C[CH2](19)                           398.495 kJ/mol
+    [CH2]CC(3) + [CH2][CH2](20)                           398.519 kJ/mol
+    H(7) + [CH2]C[CH]CC(21)                               443.425 kJ/mol
+    [CH3](10) + [CH2]CC[CH2](22)                           401.57 kJ/mol
+    H(7) + [CH2]CC[CH]C(23)                               443.413 kJ/mol
+    H(7) + [CH2][CH]CCC(24)                               443.413 kJ/mol
+    H(7) + [CH2]CCC[CH2](25)                              454.213 kJ/mol
+    CH2(S)(13) + [CH2]CCC(2)                              480.033 kJ/mol
+    CH2(T)(26) + [CH2]CCC(2)                              442.312 kJ/mol
+    H(7) + [CH]CCCC(27)                                   491.936 kJ/mol
+Path reactions:
+    H(7) + C=CCCC(15) <=> [CH2]CCCC(4)                    181.544 kJ/mol
+    [CH2]CC(3) + C=C(16) <=> [CH2]CCCC(4)                 148.043 kJ/mol
+    [CH2]CCCC(4) <=> C[CH]CCC(17)                         123.771 kJ/mol
+    [CH2]CCCC(4) <=> CC[CH]CC(18)                         178.581 kJ/mol
+    C[CH2](5) + [CH2]C[CH2](19) <=> [CH2]CCCC(4)          398.495 kJ/mol
+    [CH2]CC(3) + [CH2][CH2](20) <=> [CH2]CCCC(4)          398.922 kJ/mol
+    H(7) + [CH2]C[CH]CC(21) <=> [CH2]CCCC(4)              443.425 kJ/mol
+    [CH3](10) + [CH2]CC[CH2](22) <=> [CH2]CCCC(4)         401.656 kJ/mol
+    H(7) + [CH2]CC[CH]C(23) <=> [CH2]CCCC(4)              443.413 kJ/mol
+    H(7) + [CH2][CH]CCC(24) <=> [CH2]CCCC(4)              443.413 kJ/mol
+    H(7) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4)             454.213 kJ/mol
+    CH2(S)(13) + [CH2]CCC(2) <=> [CH2]CCCC(4)             480.033 kJ/mol
+    CH2(T)(26) + [CH2]CCC(2) <=> [CH2]CCCC(4)             476.628 kJ/mol
+    H(7) + [CH]CCCC(27) <=> [CH2]CCCC(4)                  491.936 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 2 network...
+Using 701 grains from 26.36 to 1490.76 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [CH]CCCC(27) <=> [CH2]CCCC(4)...
+Using 272 grains from 26.36 to 593.29 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 276 grains from 26.36 to 601.66 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 284 grains from 26.36 to 618.40 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 299 grains from 26.36 to 649.78 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 327 grains from 26.36 to 708.35 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 383 grains from 26.36 to 825.51 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 495 grains from 26.36 to 1059.81 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 663 grains from 26.36 to 1411.27 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 14 new edge species
+    C=CCCC(15)
+    C=C(16)
+    C[CH]CCC(17)
+    CC[CH]CC(18)
+    [CH2]C[CH2](19)
+    [CH2][CH2](20)
+    [CH2]C[CH]CC(21)
+    [CH2]CC[CH2](22)
+    [CH2]CC[CH]C(23)
+    [CH2][CH]CCC(24)
+    [CH2]CCC[CH2](25)
+    CH2(T)(26)
+    [CH]CCCC(27)
+    CCCCC(28)
+Added 0 new core reactions
+Created 23 new edge reactions
+    n-heptane(1) + [CH2]CCCC(4) <=> CC[CH]CCCC(6) + CCCCC(28)
+    n-heptane(1) + [CH2]CCCC(4) <=> CCC[CH]CCC(8) + CCCCC(28)
+    n-heptane(1) + [CH2]CCCC(4) <=> C[CH]CCCCC(11) + CCCCC(28)
+    [CH2]CCCCCC(12) + CCCCC(28) <=> n-heptane(1) + [CH2]CCCC(4)
+    [CH2]CCCC(4) + [CH2]CCCC(4) <=> CCCCC(28) + C=CCCC(15)
+    CCCCC(28) + [CH]CCCC(27) <=> [CH2]CCCC(4) + [CH2]CCCC(4)
+    [CH2]CCCC(4) + [CH2]CCCC(4) <=> CCCCC(28) + [CH2]C[CH]CC(21)
+    [CH2]CCCC(4) + [CH2]CCCC(4) <=> CCCCC(28) + [CH2]CC[CH]C(23)
+    CCCCC(28) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) + [CH2]CCCC(4)
+    [CH2]CCCC(4) => H(7) + C=CCCC(15)
+    [CH2]CCCC(4) => [CH2]CC(3) + C=C(16)
+    [CH2]CCCC(4) => C[CH]CCC(17)
+    [CH2]CCCC(4) => CC[CH]CC(18)
+    [CH2]CCCC(4) => C[CH2](5) + [CH2]C[CH2](19)
+    [CH2]CCCC(4) => [CH2]CC(3) + [CH2][CH2](20)
+    [CH2]CCCC(4) => H(7) + [CH2]C[CH]CC(21)
+    [CH2]CCCC(4) => [CH3](10) + [CH2]CC[CH2](22)
+    [CH2]CCCC(4) => H(7) + [CH2]CC[CH]C(23)
+    [CH2]CCCC(4) => H(7) + [CH2][CH]CCC(24)
+    [CH2]CCCC(4) => H(7) + [CH2]CCC[CH2](25)
+    [CH2]CCCC(4) => CH2(S)(13) + [CH2]CCC(2)
+    [CH2]CCCC(4) => CH2(T)(26) + [CH2]CCC(2)
+    [CH2]CCCC(4) => H(7) + [CH]CCCC(27)
+
+After model enlargement:
+    The model core has 6 species and 0 reactions
+    The model edge has 26 species and 31 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 0 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 0 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:02:39
+    Memory used: 632.82 MB
+
+Conducting simulation of reaction system 2...
+At time 0.0000e+00 s, species C[CH2](5) was added to model core to avoid singularity
+Making seed mechanism...
+
+
+Adding species C[CH2](5) to model core
+Updating 0 modified unimolecular reaction networks (out of 2)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    C[CH2](5)
+Created 0 new edge species
+Moved 1 reactions from edge to core
+    n-heptane(1) <=> [CH2]CCCC(4) + C[CH2](5)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 7 species and 1 reactions
+    The model edge has 25 species and 30 reactions
+
+
+Generating kinetics for new reactions...
+For reaction H(7) + [CH2][CH2](20) <=> C[CH2](5) Ea raised from -1.4 to 0 kJ/mol.
+For reaction C[CH2](5) + C[CH2](5) <=> CCCC(31) Ea raised from -0.0 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 5)...
+Updating PDepNetwork #3
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+========================================================================
+3 network information
+---------------------
+Isomers:
+    C[CH2](5)                                             108.526 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + C=C(16)                                        253.954 kJ/mol
+    H(7) + [CH2][CH2](20)                                 525.601 kJ/mol
+    [CH3](10) + CH2(T)(26)                                516.752 kJ/mol
+    H(7) + [CH]C(29)                                      563.276 kJ/mol
+Path reactions:
+    H(7) + C=C(16) <=> C[CH2](5)                           258.18 kJ/mol
+    H(7) + [CH2][CH2](20) <=> C[CH2](5)                   525.601 kJ/mol
+    [CH3](10) + CH2(T)(26) <=> C[CH2](5)                  551.067 kJ/mol
+    H(7) + [CH]C(29) <=> C[CH2](5)                        563.276 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 3 network...
+Using 696 grains from 108.53 to 1562.47 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [CH]C(29) <=> C[CH2](5)...
+Using 267 grains from 108.53 to 665.00 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 270 grains from 108.53 to 671.27 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 278 grains from 108.53 to 688.01 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 294 grains from 108.53 to 721.48 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 322 grains from 108.53 to 780.06 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 378 grains from 108.53 to 897.21 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 490 grains from 108.53 to 1131.51 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 658 grains from 108.53 to 1482.97 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 3 new edge species
+    [CH]C(29)
+    CC(30)
+    CCCC(31)
+Added 0 new core reactions
+Created 17 new edge reactions
+    n-heptane(1) + C[CH2](5) <=> CC[CH]CCCC(6) + CC(30)
+    n-heptane(1) + C[CH2](5) <=> CCC[CH]CCC(8) + CC(30)
+    n-heptane(1) + C[CH2](5) <=> C[CH]CCCCC(11) + CC(30)
+    [CH2]CCCCCC(12) + CC(30) <=> n-heptane(1) + C[CH2](5)
+    [CH2]CCCC(4) + C[CH2](5) <=> C=C(16) + CCCCC(28)
+    [CH2]CCCC(4) + C[CH2](5) <=> C=CCCC(15) + CC(30)
+    CC(30) + [CH]CCCC(27) <=> [CH2]CCCC(4) + C[CH2](5)
+    [CH2]CCCC(4) + C[CH2](5) <=> [CH2]C[CH]CC(21) + CC(30)
+    [CH2]CCCC(4) + C[CH2](5) <=> CC(30) + [CH2]CC[CH]C(23)
+    CC(30) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) + C[CH2](5)
+    CCCCC(28) + [CH]C(29) <=> [CH2]CCCC(4) + C[CH2](5)
+    C[CH2](5) + C[CH2](5) <=> C=C(16) + CC(30)
+    [CH]C(29) + CC(30) <=> C[CH2](5) + C[CH2](5)
+    C[CH2](5) => H(7) + C=C(16)
+    C[CH2](5) => H(7) + [CH2][CH2](20)
+    C[CH2](5) => [CH3](10) + CH2(T)(26)
+    C[CH2](5) => H(7) + [CH]C(29)
+
+After model enlargement:
+    The model core has 7 species and 1 reactions
+    The model edge has 28 species and 47 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 1 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 1 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:02:45
+    Memory used: 623.92 MB
+
+Conducting simulation of reaction system 1...
+At time 0.0000e+00 s, species [CH2]CC(3) at 0.528574034686 exceeded the minimum rate for simulation interruption of 0.1
+At time 0.0000e+00 s, species [CH2]CCC(2) at 0.528574034686 exceeded the minimum rate for simulation interruption of 0.1
+At time 0.0000e+00 s, species [CH2]CCCCC(9) at 0.313268645941 exceeded the minimum rate for simulation interruption of 0.1
+At time 0.0000e+00 s, species [CH3](10) at 0.313268645941 exceeded the minimum rate for simulation interruption of 0.1
+Exceeded max number of objects...removing excess objects
+Reached max number of objects...preparing to terminate
+At time 0.0000e+00 s, species [CH2]CCC(2) at rate ratio 0.528574034686 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species [CH2]CCC(2) to model core
+Exploring isomer n-heptane(1) in pressure-dependent network #4
+Updating 1 modified unimolecular reaction networks (out of 5)...
+Updating PDepNetwork #4
+========================================================================
+4 network information
+---------------------
+Isomers:
+    n-heptane(1)                                         -215.645 kJ/mol
+Reactant channels:
+    [CH2]CCCC(4) + C[CH2](5)                              145.689 kJ/mol
+Product channels:
+Path reactions:
+    [CH2]CCCC(4) + C[CH2](5) <=> n-heptane(1)             145.689 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 4 network...
+Using 736 grains from -215.65 to 1145.45 kJ/mol in steps of 1.85 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for [CH2]CCCC(4) + C[CH2](5) <=> n-heptane(1)...
+Using 250 grains from -215.65 to 246.33 kJ/mol in steps of 1.86 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from -215.65 to 253.65 kJ/mol in steps of 1.88 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from -215.65 to 270.40 kJ/mol in steps of 1.95 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from -215.65 to 302.12 kJ/mol in steps of 2.08 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 277 grains from -215.65 to 361.75 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 333 grains from -215.65 to 478.90 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 445 grains from -215.65 to 713.20 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 613 grains from -215.65 to 1064.66 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    [CH2]CCC(2)
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 8 species and 1 reactions
+    The model edge has 27 species and 47 reactions
+
+
+Generating kinetics for new reactions...
+For reaction H(7) + [CH2][CH]CC(35) <=> [CH2]CCC(2) Ea raised from -1.4 to 0 kJ/mol.
+For reaction H(7) + [CH2]CC[CH2](22) <=> [CH2]CCC(2) Ea raised from -3.3 to 0 kJ/mol.
+For reaction [CH2]CC(3) + CH2(S)(13) <=> [CH2]CCC(2) Ea raised from -1.5 to 0 kJ/mol.
+For reaction [CH2]CC(3) + CH2(S)(13) <=> [CH2]CCC(2) Ea raised from -5.1 to 0 kJ/mol.
+For reaction C[CH2](5) + [CH2]CCC(2) <=> CCCCCC(14) Ea raised from -0.0 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 7)...
+Updating PDepNetwork #6
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+========================================================================
+6 network information
+---------------------
+Isomers:
+    [CH2]CCC(2)                                           60.9423 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + C=CCC(32)                                      195.283 kJ/mol
+    C[CH2](5) + C=C(16)                                   150.676 kJ/mol
+    C[CH]CC(33)                                           50.1423 kJ/mol
+    C[CH2](5) + [CH2][CH2](20)                            422.323 kJ/mol
+    [CH3](10) + [CH2]C[CH2](19)                            425.35 kJ/mol
+    H(7) + [CH2]C[CH]C(34)                                467.193 kJ/mol
+    H(7) + [CH2][CH]CC(35)                                467.193 kJ/mol
+    H(7) + [CH2]CC[CH2](22)                               477.993 kJ/mol
+    [CH2]CC(3) + CH2(S)(13)                               503.814 kJ/mol
+    [CH2]CC(3) + CH2(T)(26)                               466.093 kJ/mol
+    H(7) + [CH]CCC(36)                                    515.716 kJ/mol
+Path reactions:
+    H(7) + C=CCC(32) <=> [CH2]CCC(2)                      205.325 kJ/mol
+    C[CH2](5) + C=C(16) <=> [CH2]CCC(2)                   171.847 kJ/mol
+    [CH2]CCC(2) <=> C[CH]CC(33)                           208.638 kJ/mol
+    C[CH2](5) + [CH2][CH2](20) <=> [CH2]CCC(2)            422.726 kJ/mol
+    [CH3](10) + [CH2]C[CH2](19) <=> [CH2]CCC(2)           425.436 kJ/mol
+    H(7) + [CH2]C[CH]C(34) <=> [CH2]CCC(2)                467.193 kJ/mol
+    H(7) + [CH2][CH]CC(35) <=> [CH2]CCC(2)                467.193 kJ/mol
+    H(7) + [CH2]CC[CH2](22) <=> [CH2]CCC(2)               477.993 kJ/mol
+    [CH2]CC(3) + CH2(S)(13) <=> [CH2]CCC(2)               503.814 kJ/mol
+    [CH2]CC(3) + CH2(T)(26) <=> [CH2]CCC(2)               500.408 kJ/mol
+    H(7) + [CH]CCC(36) <=> [CH2]CCC(2)                    515.716 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 6 network...
+Using 701 grains from 50.14 to 1514.54 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [CH]CCC(36) <=> [CH2]CCC(2)...
+Using 272 grains from 50.14 to 617.07 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 276 grains from 50.14 to 625.44 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 284 grains from 50.14 to 642.18 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 299 grains from 50.14 to 673.56 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 327 grains from 50.14 to 732.13 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 383 grains from 50.14 to 849.29 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 495 grains from 50.14 to 1083.59 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 663 grains from 50.14 to 1435.05 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+Warning: k(T,P) for net reaction [CH2]CCC(2) => C[CH2](5) + C=C(16) exceeds high-P k(T) by 5.05581 at 302.617 K, 75.4469 bar
+    k(T,P) =  2.76e-07    k(T) =  5.46e-08
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 5 new edge species
+    C=CCC(32)
+    C[CH]CC(33)
+    [CH2]C[CH]C(34)
+    [CH2][CH]CC(35)
+    [CH]CCC(36)
+Added 0 new core reactions
+Created 34 new edge reactions
+    n-heptane(1) + [CH2]CCC(2) <=> CC[CH]CCCC(6) + CCCC(31)
+    n-heptane(1) + [CH2]CCC(2) <=> CCC[CH]CCC(8) + CCCC(31)
+    n-heptane(1) + [CH2]CCC(2) <=> C[CH]CCCCC(11) + CCCC(31)
+    [CH2]CCCCCC(12) + CCCC(31) <=> n-heptane(1) + [CH2]CCC(2)
+    [CH2]CCCC(4) + [CH2]CCC(2) <=> CCCCC(28) + C=CCC(32)
+    [CH2]CCCC(4) + [CH2]CCC(2) <=> CCCC(31) + C=CCCC(15)
+    CCCC(31) + [CH]CCCC(27) <=> [CH2]CCCC(4) + [CH2]CCC(2)
+    [CH2]CCCC(4) + [CH2]CCC(2) <=> CCCC(31) + [CH2]C[CH]CC(21)
+    [CH2]CCCC(4) + [CH2]CCC(2) <=> CCCC(31) + [CH2]CC[CH]C(23)
+    CCCC(31) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) + [CH2]CCC(2)
+    [CH]CCC(36) + CCCCC(28) <=> [CH2]CCCC(4) + [CH2]CCC(2)
+    [CH2]CCCC(4) + [CH2]CCC(2) <=> [CH2]C[CH]C(34) + CCCCC(28)
+    CCCCC(28) + [CH2]CC[CH2](22) <=> [CH2]CCCC(4) + [CH2]CCC(2)
+    C[CH2](5) + [CH2]CCC(2) <=> CC(30) + C=CCC(32)
+    C[CH2](5) + [CH2]CCC(2) <=> CCCC(31) + C=C(16)
+    CCCC(31) + [CH]C(29) <=> C[CH2](5) + [CH2]CCC(2)
+    [CH]CCC(36) + CC(30) <=> C[CH2](5) + [CH2]CCC(2)
+    C[CH2](5) + [CH2]CCC(2) <=> [CH2]C[CH]C(34) + CC(30)
+    CC(30) + [CH2]CC[CH2](22) <=> C[CH2](5) + [CH2]CCC(2)
+    [CH2]CCC(2) + [CH2]CCC(2) <=> CCCC(31) + C=CCC(32)
+    [CH]CCC(36) + CCCC(31) <=> [CH2]CCC(2) + [CH2]CCC(2)
+    [CH2]CCC(2) + [CH2]CCC(2) <=> [CH2]C[CH]C(34) + CCCC(31)
+    CCCC(31) + [CH2]CC[CH2](22) <=> [CH2]CCC(2) + [CH2]CCC(2)
+    [CH2]CCC(2) => H(7) + C=CCC(32)
+    [CH2]CCC(2) => C[CH2](5) + C=C(16)
+    [CH2]CCC(2) => C[CH]CC(33)
+    [CH2]CCC(2) => C[CH2](5) + [CH2][CH2](20)
+    [CH2]CCC(2) => [CH3](10) + [CH2]C[CH2](19)
+    [CH2]CCC(2) => H(7) + [CH2]C[CH]C(34)
+    [CH2]CCC(2) => H(7) + [CH2][CH]CC(35)
+    [CH2]CCC(2) => H(7) + [CH2]CC[CH2](22)
+    [CH2]CCC(2) => [CH2]CC(3) + CH2(S)(13)
+    [CH2]CCC(2) => [CH2]CC(3) + CH2(T)(26)
+    [CH2]CCC(2) => H(7) + [CH]CCC(36)
+
+After model enlargement:
+    The model core has 8 species and 1 reactions
+    The model edge has 32 species and 81 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 1 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 1 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:01
+    Memory used: 628.58 MB
+
+Conducting simulation of reaction system 2...
+At time 0.0000e+00 s, species [CH2]CC(3) at 0.212780701306 exceeded the minimum rate for simulation interruption of 0.1
+At time 0.0000e+00 s, species [CH2]CCCCC(9) at 0.15579695867 exceeded the minimum rate for simulation interruption of 0.1
+At time 0.0000e+00 s, species [CH3](10) at 0.15579695867 exceeded the minimum rate for simulation interruption of 0.1
+Exceeded max number of objects...removing excess objects
+Reached max number of objects...preparing to terminate
+At time 0.0000e+00 s, species [CH2]CC(3) at rate ratio 0.212780701306 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species [CH2]CC(3) to model core
+Updating 0 modified unimolecular reaction networks (out of 7)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    [CH2]CC(3)
+Created 0 new edge species
+Moved 1 reactions from edge to core
+    n-heptane(1) <=> [CH2]CC(3) + [CH2]CCC(2)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 9 species and 2 reactions
+    The model edge has 31 species and 80 reactions
+
+
+Generating kinetics for new reactions...
+For reaction [CH3](10) + [CH2][CH2](20) <=> [CH2]CC(3) Ea raised from -6.7 to 0 kJ/mol.
+For reaction H(7) + [CH2][CH]C(39) <=> [CH2]CC(3) Ea raised from -1.4 to 0 kJ/mol.
+For reaction H(7) + [CH2]C[CH2](19) <=> [CH2]CC(3) Ea raised from -3.3 to 0 kJ/mol.
+For reaction CH2(S)(13) + C[CH2](5) <=> [CH2]CC(3) Ea raised from -5.1 to 0 kJ/mol.
+For reaction [CH2]CC(3) + C[CH2](5) <=> CCCCC(28) Ea raised from -0.0 to 0 kJ/mol.
+For reaction [CH2]CC(3) + [CH2]CC(3) <=> CCCCCC(14) Ea raised from -0.0 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 11)...
+Updating PDepNetwork #8
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+========================================================================
+8 network information
+---------------------
+Isomers:
+    [CH2]CC(3)                                            84.7226 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + C=CC(37)                                       217.928 kJ/mol
+    [CH3](10) + C=C(16)                                   177.531 kJ/mol
+    C[CH]C(38)                                            73.7998 kJ/mol
+    [CH3](10) + [CH2][CH2](20)                            449.178 kJ/mol
+    H(7) + [CH2][CH]C(39)                                 490.851 kJ/mol
+    H(7) + [CH2]C[CH2](19)                                501.774 kJ/mol
+    CH2(S)(13) + C[CH2](5)                                527.617 kJ/mol
+    C[CH2](5) + CH2(T)(26)                                489.896 kJ/mol
+    H(7) + [CH]CC(40)                                     539.496 kJ/mol
+Path reactions:
+    H(7) + C=CC(37) <=> [CH2]CC(3)                        225.711 kJ/mol
+    [CH3](10) + C=C(16) <=> [CH2]CC(3)                    201.087 kJ/mol
+    C[CH]C(38) <=> [CH2]CC(3)                             242.415 kJ/mol
+    [CH3](10) + [CH2][CH2](20) <=> [CH2]CC(3)             449.178 kJ/mol
+    H(7) + [CH2][CH]C(39) <=> [CH2]CC(3)                  490.851 kJ/mol
+    H(7) + [CH2]C[CH2](19) <=> [CH2]CC(3)                 501.774 kJ/mol
+    CH2(S)(13) + C[CH2](5) <=> [CH2]CC(3)                 527.617 kJ/mol
+    C[CH2](5) + CH2(T)(26) <=> [CH2]CC(3)                 524.212 kJ/mol
+    H(7) + [CH]CC(40) <=> [CH2]CC(3)                      539.496 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 8 network...
+Using 701 grains from 73.80 to 1538.20 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [CH]CC(40) <=> [CH2]CC(3)...
+Using 272 grains from 73.80 to 640.73 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 276 grains from 73.80 to 649.10 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 284 grains from 73.80 to 665.84 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 299 grains from 73.80 to 697.22 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 327 grains from 73.80 to 755.79 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 383 grains from 73.80 to 872.94 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 495 grains from 73.80 to 1107.25 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 663 grains from 73.80 to 1458.70 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 5 new edge species
+    C=CC(37)
+    C[CH]C(38)
+    [CH2][CH]C(39)
+    [CH]CC(40)
+    CCC(41)
+Added 0 new core reactions
+Created 36 new edge reactions
+    n-heptane(1) + [CH2]CC(3) <=> CC[CH]CCCC(6) + CCC(41)
+    n-heptane(1) + [CH2]CC(3) <=> CCC[CH]CCC(8) + CCC(41)
+    n-heptane(1) + [CH2]CC(3) <=> C[CH]CCCCC(11) + CCC(41)
+    [CH2]CCCCCC(12) + CCC(41) <=> n-heptane(1) + [CH2]CC(3)
+    [CH2]CCCC(4) + [CH2]CC(3) <=> CCCCC(28) + C=CC(37)
+    [CH2]CCCC(4) + [CH2]CC(3) <=> CCC(41) + C=CCCC(15)
+    CCC(41) + [CH]CCCC(27) <=> [CH2]CCCC(4) + [CH2]CC(3)
+    [CH2]CCCC(4) + [CH2]CC(3) <=> CCC(41) + [CH2]C[CH]CC(21)
+    [CH2]CCCC(4) + [CH2]CC(3) <=> CCC(41) + [CH2]CC[CH]C(23)
+    CCC(41) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) + [CH2]CC(3)
+    [CH]CC(40) + CCCCC(28) <=> [CH2]CCCC(4) + [CH2]CC(3)
+    CCCCC(28) + [CH2]C[CH2](19) <=> [CH2]CCCC(4) + [CH2]CC(3)
+    [CH2]CC(3) + C[CH2](5) <=> CC(30) + C=CC(37)
+    [CH2]CC(3) + C[CH2](5) <=> CCC(41) + C=C(16)
+    CCC(41) + [CH]C(29) <=> [CH2]CC(3) + C[CH2](5)
+    [CH]CC(40) + CC(30) <=> [CH2]CC(3) + C[CH2](5)
+    [CH2]C[CH2](19) + CC(30) <=> [CH2]CC(3) + C[CH2](5)
+    [CH2]CC(3) + [CH2]CCC(2) <=> CCCC(31) + C=CC(37)
+    [CH2]CC(3) + [CH2]CCC(2) <=> CCC(41) + C=CCC(32)
+    [CH]CCC(36) + CCC(41) <=> [CH2]CC(3) + [CH2]CCC(2)
+    [CH2]CC(3) + [CH2]CCC(2) <=> CCC(41) + [CH2]C[CH]C(34)
+    CCC(41) + [CH2]CC[CH2](22) <=> [CH2]CC(3) + [CH2]CCC(2)
+    [CH]CC(40) + CCCC(31) <=> [CH2]CC(3) + [CH2]CCC(2)
+    CCCC(31) + [CH2]C[CH2](19) <=> [CH2]CC(3) + [CH2]CCC(2)
+    [CH2]CC(3) + [CH2]CC(3) <=> CCC(41) + C=CC(37)
+    [CH]CC(40) + CCC(41) <=> [CH2]CC(3) + [CH2]CC(3)
+    CCC(41) + [CH2]C[CH2](19) <=> [CH2]CC(3) + [CH2]CC(3)
+    [CH2]CC(3) => H(7) + C=CC(37)
+    [CH2]CC(3) => [CH3](10) + C=C(16)
+    [CH2]CC(3) => C[CH]C(38)
+    [CH2]CC(3) => [CH3](10) + [CH2][CH2](20)
+    [CH2]CC(3) => H(7) + [CH2][CH]C(39)
+    [CH2]CC(3) => H(7) + [CH2]C[CH2](19)
+    [CH2]CC(3) => CH2(S)(13) + C[CH2](5)
+    [CH2]CC(3) => C[CH2](5) + CH2(T)(26)
+    [CH2]CC(3) => H(7) + [CH]CC(40)
+
+After model enlargement:
+    The model core has 9 species and 2 reactions
+    The model edge has 36 species and 116 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 2 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 2 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:10
+    Memory used: 623.51 MB
+
+Conducting simulation of reaction system 1...
+At time 0.0000e+00 s, species [CH2]CCCCC(9) at 0.12525524849 exceeded the minimum rate for simulation interruption of 0.1
+At time 0.0000e+00 s, species [CH3](10) at 0.12525524849 exceeded the minimum rate for simulation interruption of 0.1
+Exceeded max number of objects...removing excess objects
+Reached max number of objects...preparing to terminate
+At time 0.0000e+00 s, species [CH3](10) at rate ratio 0.12525524849 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species [CH3](10) to model core
+Exploring isomer n-heptane(1) in pressure-dependent network #10
+Updating 1 modified unimolecular reaction networks (out of 11)...
+Updating PDepNetwork #10
+========================================================================
+10 network information
+----------------------
+Isomers:
+    n-heptane(1)                                         -215.645 kJ/mol
+Reactant channels:
+    [CH2]CC(3) + [CH2]CCC(2)                              145.665 kJ/mol
+Product channels:
+Path reactions:
+    [CH2]CC(3) + [CH2]CCC(2) <=> n-heptane(1)             145.665 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 10 network...
+Using 736 grains from -215.65 to 1145.38 kJ/mol in steps of 1.85 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for [CH2]CC(3) + [CH2]CCC(2) <=> n-heptane(1)...
+Using 250 grains from -215.65 to 246.31 kJ/mol in steps of 1.86 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from -215.65 to 253.63 kJ/mol in steps of 1.88 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from -215.65 to 270.38 kJ/mol in steps of 1.95 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from -215.65 to 302.10 kJ/mol in steps of 2.08 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 277 grains from -215.65 to 361.75 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 333 grains from -215.65 to 478.90 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 445 grains from -215.65 to 713.20 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 613 grains from -215.65 to 1064.66 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    [CH3](10)
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 10 species and 2 reactions
+    The model edge has 35 species and 116 reactions
+
+
+Species with SMILES of C named CH4 based on thermo library name
+Generating kinetics for new reactions...
+Updating 1 modified unimolecular reaction networks (out of 17)...
+Updating PDepNetwork #12
+========================================================================
+12 network information
+----------------------
+Isomers:
+    [CH3](10)                                             135.382 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + CH2(T)(26)                                     593.175 kJ/mol
+Path reactions:
+    H(7) + CH2(T)(26) <=> [CH3](10)                       593.175 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 12 network...
+Using 697 grains from 135.38 to 1591.41 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + CH2(T)(26) <=> [CH3](10)...
+Using 268 grains from 135.38 to 693.95 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 272 grains from 135.38 to 702.31 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 280 grains from 135.38 to 719.05 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 295 grains from 135.38 to 750.43 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 324 grains from 135.38 to 811.10 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 379 grains from 135.38 to 926.16 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 492 grains from 135.38 to 1162.55 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 659 grains from 135.38 to 1511.92 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 1 new edge species
+    CH4(42)
+Added 0 new core reactions
+Created 24 new edge reactions
+    n-heptane(1) + [CH3](10) <=> CC[CH]CCCC(6) + CH4(42)
+    n-heptane(1) + [CH3](10) <=> CCC[CH]CCC(8) + CH4(42)
+    n-heptane(1) + [CH3](10) <=> C[CH]CCCCC(11) + CH4(42)
+    n-heptane(1) + [CH3](10) <=> [CH2]CCCCCC(12) + CH4(42)
+    [CH2]CCCC(4) + [CH3](10) <=> CH4(42) + C=CCCC(15)
+    CH4(42) + [CH]CCCC(27) <=> [CH2]CCCC(4) + [CH3](10)
+    [CH2]CCCC(4) + [CH3](10) <=> CH4(42) + [CH2]C[CH]CC(21)
+    [CH2]CCCC(4) + [CH3](10) <=> CH4(42) + [CH2]CC[CH]C(23)
+    [CH2]CCCC(4) + [CH3](10) <=> CH4(42) + [CH2]CCC[CH2](25)
+    CCCCC(28) + CH2(T)(26) <=> [CH2]CCCC(4) + [CH3](10)
+    C[CH2](5) + [CH3](10) <=> CH4(42) + C=C(16)
+    CH4(42) + [CH]C(29) <=> C[CH2](5) + [CH3](10)
+    CC(30) + CH2(T)(26) <=> C[CH2](5) + [CH3](10)
+    [CH3](10) + [CH2]CCC(2) <=> CH4(42) + C=CCC(32)
+    [CH]CCC(36) + CH4(42) <=> [CH3](10) + [CH2]CCC(2)
+    [CH3](10) + [CH2]CCC(2) <=> [CH2]C[CH]C(34) + CH4(42)
+    [CH3](10) + [CH2]CCC(2) <=> CH4(42) + [CH2]CC[CH2](22)
+    CCCC(31) + CH2(T)(26) <=> [CH3](10) + [CH2]CCC(2)
+    [CH2]CC(3) + [CH3](10) <=> CH4(42) + C=CC(37)
+    [CH]CC(40) + CH4(42) <=> [CH2]CC(3) + [CH3](10)
+    [CH2]CC(3) + [CH3](10) <=> CH4(42) + [CH2]C[CH2](19)
+    CCC(41) + CH2(T)(26) <=> [CH2]CC(3) + [CH3](10)
+    CH4(42) + CH2(T)(26) <=> [CH3](10) + [CH3](10)
+    [CH3](10) => H(7) + CH2(T)(26)
+
+After model enlargement:
+    The model core has 10 species and 2 reactions
+    The model edge has 36 species and 140 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 2 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 2 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:20
+    Memory used: 623.39 MB
+
+Conducting simulation of reaction system 2...
+At time 1.6799e-08 s, species C=C(16) at 0.100031516489 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 1.6799e-08 s, species C=C(16) at rate ratio 0.100031516489 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species C=C(16) to model core
+Updating 0 modified unimolecular reaction networks (out of 17)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    C=C(16)
+Created 0 new edge species
+Moved 3 reactions from edge to core
+    [CH2]CCCC(4) <=> [CH2]CC(3) + C=C(16)
+    [CH2]CCC(2) <=> C[CH2](5) + C=C(16)
+    [CH2]CC(3) <=> [CH3](10) + C=C(16)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 11 species and 5 reactions
+    The model edge has 35 species and 137 reactions
+
+
+Generating kinetics for new reactions...
+Updating 1 modified unimolecular reaction networks (out of 25)...
+Updating PDepNetwork #18
+Warning: For [CH]=C, more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (1 frequencies) to compensate.
+Warning: Statmech node 'C_R0' and all its parents have data = None
+========================================================================
+18 network information
+----------------------
+Isomers:
+    C=C(16)                                               42.1493 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + [CH]=C(43)                                      501.05 kJ/mol
+    [CH]C(44)                                             354.356 kJ/mol
+Path reactions:
+    H(7) + [CH]=C(43) <=> C=C(16)                          501.05 kJ/mol
+    [CH]C(44) <=> C=C(16)                                 411.205 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 18 network...
+Using 698 grains from 42.15 to 1500.27 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for [CH]C(44) <=> C=C(16)...
+Using 269 grains from 42.15 to 602.81 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 272 grains from 42.15 to 609.08 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 280 grains from 42.15 to 625.82 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 296 grains from 42.15 to 659.29 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 324 grains from 42.15 to 717.87 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 380 grains from 42.15 to 835.02 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 492 grains from 42.15 to 1069.32 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 660 grains from 42.15 to 1420.78 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 3 new edge species
+    [CH]=C(43)
+    [CH]C(44)
+    C1CCC1(45)
+Added 0 new core reactions
+Created 27 new edge reactions
+    C[CH2](5) + C[CH]CCCCC(11) <=> n-heptane(1) + C=C(16)
+    CC[CH]CCCC(6) + C[CH2](5) <=> n-heptane(1) + C=C(16)
+    CCC[CH]CCC(8) + C[CH2](5) <=> n-heptane(1) + C=C(16)
+    C[CH2](5) + [CH2]CCCCCC(12) <=> n-heptane(1) + C=C(16)
+    C[CH2](5) + [CH]CCCC(27) <=> [CH2]CCCC(4) + C=C(16)
+    C[CH2](5) + [CH2]CC[CH]C(23) <=> [CH2]CCCC(4) + C=C(16)
+    C[CH2](5) + [CH2]C[CH]CC(21) <=> [CH2]CCCC(4) + C=C(16)
+    C[CH2](5) + [CH2][CH]CCC(24) <=> [CH2]CCCC(4) + C=C(16)
+    C[CH2](5) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) + C=C(16)
+    [CH]=C(43) + CCCCC(28) <=> [CH2]CCCC(4) + C=C(16)
+    C[CH2](5) + [CH]C(29) <=> C[CH2](5) + C=C(16)
+    C[CH2](5) + [CH2][CH2](20) <=> C[CH2](5) + C=C(16)
+    [CH]=C(43) + CC(30) <=> C[CH2](5) + C=C(16)
+    C[CH2](5) + [CH]CCC(36) <=> C=C(16) + [CH2]CCC(2)
+    C[CH2](5) + [CH2]C[CH]C(34) <=> C=C(16) + [CH2]CCC(2)
+    C[CH2](5) + [CH2][CH]CC(35) <=> C=C(16) + [CH2]CCC(2)
+    C[CH2](5) + [CH2]CC[CH2](22) <=> C=C(16) + [CH2]CCC(2)
+    [CH]=C(43) + CCCC(31) <=> C=C(16) + [CH2]CCC(2)
+    C[CH2](5) + [CH]CC(40) <=> [CH2]CC(3) + C=C(16)
+    C[CH2](5) + [CH2][CH]C(39) <=> [CH2]CC(3) + C=C(16)
+    C[CH2](5) + [CH2]C[CH2](19) <=> [CH2]CC(3) + C=C(16)
+    [CH]=C(43) + CCC(41) <=> [CH2]CC(3) + C=C(16)
+    C[CH2](5) + CH2(T)(26) <=> [CH3](10) + C=C(16)
+    [CH]=C(43) + CH4(42) <=> [CH3](10) + C=C(16)
+    C[CH2](5) + [CH]=C(43) <=> C=C(16) + C=C(16)
+    C=C(16) => H(7) + [CH]=C(43)
+    C=C(16) => [CH]C(44)
+
+After model enlargement:
+    The model core has 11 species and 5 reactions
+    The model edge has 38 species and 164 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 5 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 5 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:25
+    Memory used: 623.62 MB
+
+Conducting simulation of reaction system 1...
+At time 1.1290e-07 s, PDepNetwork #24 at 0.105755805762 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 1.1290e-07 s, PDepNetwork #24 at 0.105755805762 exceeded the minimum rate for exploring of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Exploring isomer [CH2]CC[CH2](22) in pressure-dependent network #24
+Exploring isomer [CH2]CCC(2) in pressure-dependent network #20
+Exploring isomer [CH2]CCCC(4) in pressure-dependent network #22
+Exploring isomer [CH2]CC(3) in pressure-dependent network #23
+Generating kinetics for new reactions...
+For reaction [CH2][CH2](20) + [CH2][CH2](20) <=> [CH2]CC[CH2](22) Ea raised from -15.6 to -15.6 kJ/mol.
+For reaction [CH2][CH2](20) + [CH2][CH2](20) <=> [CH2]CC[CH2](22) Ea raised from -15.6 to 0 kJ/mol.
+For reaction H(7) + [CH2][CH]C[CH2](47) <=> [CH2]CC[CH2](22) Ea raised from -1.4 to 0 kJ/mol.
+Updating 4 modified unimolecular reaction networks (out of 25)...
+Updating PDepNetwork #20
+========================================================================
+20 network information
+----------------------
+Isomers:
+    [CH2]CCC(2)                                           60.9423 kJ/mol
+Reactant channels:
+    C[CH2](5) + C=C(16)                                   150.676 kJ/mol
+Product channels:
+Path reactions:
+    C[CH2](5) + C=C(16) <=> [CH2]CCC(2)                   171.847 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 20 network...
+Using 1312 grains from 60.94 to 1170.18 kJ/mol in steps of 0.85 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for C[CH2](5) + C=C(16) <=> [CH2]CCC(2)...
+Using 250 grains from 60.94 to 272.49 kJ/mol in steps of 0.85 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from 60.94 to 279.81 kJ/mol in steps of 0.88 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from 60.94 to 296.56 kJ/mol in steps of 0.95 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from 60.94 to 328.28 kJ/mol in steps of 1.07 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 250 grains from 60.94 to 387.71 kJ/mol in steps of 1.31 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 250 grains from 60.94 to 504.43 kJ/mol in steps of 1.78 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 326 grains from 60.94 to 740.84 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 493 grains from 60.94 to 1090.21 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+Updating PDepNetwork #22
+========================================================================
+22 network information
+----------------------
+Isomers:
+    [CH2]CCCC(4)                                          37.1621 kJ/mol
+Reactant channels:
+    [CH2]CC(3) + C=C(16)                                  126.872 kJ/mol
+Product channels:
+Path reactions:
+    [CH2]CC(3) + C=C(16) <=> [CH2]CCCC(4)                 148.043 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 22 network...
+Using 1312 grains from 37.16 to 1146.27 kJ/mol in steps of 0.85 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for [CH2]CC(3) + C=C(16) <=> [CH2]CCCC(4)...
+Using 250 grains from 37.16 to 248.69 kJ/mol in steps of 0.85 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from 37.16 to 256.00 kJ/mol in steps of 0.88 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from 37.16 to 272.76 kJ/mol in steps of 0.95 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from 37.16 to 304.48 kJ/mol in steps of 1.07 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 250 grains from 37.16 to 363.91 kJ/mol in steps of 1.31 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 250 grains from 37.16 to 480.63 kJ/mol in steps of 1.78 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 326 grains from 37.16 to 717.06 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 493 grains from 37.16 to 1066.43 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+Updating PDepNetwork #23
+========================================================================
+23 network information
+----------------------
+Isomers:
+    [CH2]CC(3)                                            84.7226 kJ/mol
+Reactant channels:
+    [CH3](10) + C=C(16)                                   177.531 kJ/mol
+Product channels:
+Path reactions:
+    [CH3](10) + C=C(16) <=> [CH2]CC(3)                    201.087 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 23 network...
+Using 1286 grains from 84.72 to 1200.13 kJ/mol in steps of 0.87 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for [CH3](10) + C=C(16) <=> [CH2]CC(3)...
+Using 250 grains from 84.72 to 301.73 kJ/mol in steps of 0.87 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from 84.72 to 309.05 kJ/mol in steps of 0.90 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from 84.72 to 325.80 kJ/mol in steps of 0.97 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from 84.72 to 357.52 kJ/mol in steps of 1.10 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 250 grains from 84.72 to 416.95 kJ/mol in steps of 1.33 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 250 grains from 84.72 to 533.67 kJ/mol in steps of 1.80 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 328 grains from 84.72 to 768.81 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 496 grains from 84.72 to 1120.26 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+Updating PDepNetwork #24
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+========================================================================
+24 network information
+----------------------
+Isomers:
+    [CH2]CC[CH2](22)                                      266.189 kJ/mol
+Reactant channels:
+    C=C(16) + C=C(16)                                     84.2986 kJ/mol
+Product channels:
+    H(7) + [CH2]CC=C(46)                                  400.529 kJ/mol
+    C=C(16) + [CH2][CH2](20)                              355.946 kJ/mol
+    [CH2]C[CH]C(34)                                       255.389 kJ/mol
+    [CH2][CH]CC(35)                                       255.389 kJ/mol
+    [CH2][CH2](20) + [CH2][CH2](20)                       627.593 kJ/mol
+    H(7) + [CH2][CH]C[CH2](47)                             672.44 kJ/mol
+    C=CCC(32)                                            -16.5218 kJ/mol
+    C1CCC1(45)                                             13.873 kJ/mol
+    [CH2]C[CH2](19) + CH2(T)(26)                          671.339 kJ/mol
+    H(7) + [CH]CC[CH2](48)                                720.962 kJ/mol
+Path reactions:
+    [CH2]CC[CH2](22) <=> C=C(16) + C=C(16)                266.189 kJ/mol
+    H(7) + [CH2]CC=C(46) <=> [CH2]CC[CH2](22)             410.571 kJ/mol
+    C=C(16) + [CH2][CH2](20) <=> [CH2]CC[CH2](22)         377.407 kJ/mol
+    [CH2]CC[CH2](22) <=> [CH2]C[CH]C(34)                  418.068 kJ/mol
+    [CH2]CC[CH2](22) <=> [CH2][CH]CC(35)                  384.128 kJ/mol
+    [CH2][CH2](20) + [CH2][CH2](20) <=> [CH2]CC[CH2](22)      627.593 kJ/mol
+    H(7) + [CH2][CH]C[CH2](47) <=> [CH2]CC[CH2](22)        672.44 kJ/mol
+    [CH2]CC[CH2](22) <=> C=CCC(32)                        329.589 kJ/mol
+    [CH2]CC[CH2](22) <=> C1CCC1(45)                       274.473 kJ/mol
+    [CH2]C[CH2](19) + CH2(T)(26) <=> [CH2]CC[CH2](22)      705.655 kJ/mol
+    H(7) + [CH]CC[CH2](48) <=> [CH2]CC[CH2](22)           720.962 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 24 network...
+Using 831 grains from -16.52 to 1719.84 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [CH]CC[CH2](48) <=> [CH2]CC[CH2](22)...
+Using 402 grains from -16.52 to 822.37 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 406 grains from -16.52 to 830.74 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 414 grains from -16.52 to 847.47 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 429 grains from -16.52 to 878.85 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 457 grains from -16.52 to 937.43 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 513 grains from -16.52 to 1054.58 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 625 grains from -16.52 to 1288.89 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 793 grains from -16.52 to 1640.34 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 0 new core species
+Created 3 new edge species
+    [CH2]CC=C(46)
+    [CH2][CH]C[CH2](47)
+    [CH]CC[CH2](48)
+Added 0 new core reactions
+Created 10 new edge reactions
+    C=C(16) + C=C(16) => [CH2]CC[CH2](22)
+    C=C(16) + C=C(16) => H(7) + [CH2]CC=C(46)
+    C=C(16) + C=C(16) => C=C(16) + [CH2][CH2](20)
+    C=C(16) + C=C(16) => [CH2]C[CH]C(34)
+    C=C(16) + C=C(16) => [CH2][CH]CC(35)
+    C=C(16) + C=C(16) => H(7) + [CH2][CH]C[CH2](47)
+    C=C(16) + C=C(16) => C=CCC(32)
+    C=C(16) + C=C(16) => C1CCC1(45)
+    C=C(16) + C=C(16) => [CH2]C[CH2](19) + CH2(T)(26)
+    C=C(16) + C=C(16) => H(7) + [CH]CC[CH2](48)
+
+After model enlargement:
+    The model core has 11 species and 5 reactions
+    The model edge has 41 species and 174 reactions
+
+
+Updating 0 modified unimolecular reaction networks (out of 25)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 11 species and 5 reactions
+    The model edge has 41 species and 174 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 5 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 5 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:40
+    Memory used: 640.02 MB
+
+Conducting simulation of reaction system 2...
+At time 1.2062e-07 s, species H(7) at 0.100789252012 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 1.2062e-07 s, species H(7) at rate ratio 0.100789252012 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species H(7) to model core
+Updating 0 modified unimolecular reaction networks (out of 25)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    H(7)
+Created 0 new edge species
+Moved 1 reactions from edge to core
+    C[CH2](5) <=> H(7) + C=C(16)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 12 species and 6 reactions
+    The model edge has 40 species and 173 reactions
+
+
+Species with SMILES of [H][H] named H2 based on thermo library name
+Generating kinetics for new reactions...
+For reaction [CH2]CCCC(4) + H(7) <=> CCCCC(28) Ea raised from -3.3 to 0 kJ/mol.
+For reaction H(7) + [CH2]CCC(2) <=> CCCC(31) Ea raised from -3.3 to 0 kJ/mol.
+For reaction [CH2]CC(3) + H(7) <=> CCC(41) Ea raised from -3.3 to 0 kJ/mol.
+Updating 0 modified unimolecular reaction networks (out of 32)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 1 new edge species
+    H2(49)
+Added 0 new core reactions
+Created 20 new edge reactions
+    n-heptane(1) + H(7) <=> CC[CH]CCCC(6) + H2(49)
+    n-heptane(1) + H(7) <=> CCC[CH]CCC(8) + H2(49)
+    n-heptane(1) + H(7) <=> C[CH]CCCCC(11) + H2(49)
+    n-heptane(1) + H(7) <=> [CH2]CCCCCC(12) + H2(49)
+    [CH2]CCCC(4) + H(7) <=> H2(49) + C=CCCC(15)
+    H2(49) + [CH]CCCC(27) <=> [CH2]CCCC(4) + H(7)
+    [CH2]CCCC(4) + H(7) <=> H2(49) + [CH2]C[CH]CC(21)
+    [CH2]CCCC(4) + H(7) <=> H2(49) + [CH2]CC[CH]C(23)
+    [CH2]CCCC(4) + H(7) <=> H2(49) + [CH2]CCC[CH2](25)
+    C[CH2](5) + H(7) <=> H2(49) + C=C(16)
+    H2(49) + [CH]C(29) <=> C[CH2](5) + H(7)
+    H(7) + [CH2]CCC(2) <=> H2(49) + C=CCC(32)
+    H2(49) + [CH]CCC(36) <=> H(7) + [CH2]CCC(2)
+    H(7) + [CH2]CCC(2) <=> H2(49) + [CH2]C[CH]C(34)
+    H(7) + [CH2]CCC(2) <=> H2(49) + [CH2]CC[CH2](22)
+    [CH2]CC(3) + H(7) <=> H2(49) + C=CC(37)
+    [CH]CC(40) + H2(49) <=> [CH2]CC(3) + H(7)
+    [CH2]CC(3) + H(7) <=> H2(49) + [CH2]C[CH2](19)
+    H2(49) + CH2(T)(26) <=> H(7) + [CH3](10)
+    H(7) + C=C(16) <=> H2(49) + [CH]=C(43)
+
+After model enlargement:
+    The model core has 12 species and 6 reactions
+    The model edge has 41 species and 193 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 6 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 6 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:41
+    Memory used: 640.19 MB
+
+Conducting simulation of reaction system 1...
+At time 1.1457e-05 s, PDepNetwork #30 at 0.105636231462 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 1.1457e-05 s, PDepNetwork #30 at 0.105636231462 exceeded the minimum rate for exploring of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Exploring isomer CH4(42) in pressure-dependent network #30
+Exploring isomer C[CH2](5) in pressure-dependent network #31
+Generating kinetics for new reactions...
+For reaction CH2(S)(13) + H2(49) <=> CH4(42) Ea raised from -5.1 to 0 kJ/mol.
+Updating 2 modified unimolecular reaction networks (out of 32)...
+Updating PDepNetwork #30
+Warning: Statmech node 'C_R0' and all its parents have data = None
+Warning: Maximum number of iterations reached when fitting spectral data for C.
+========================================================================
+30 network information
+----------------------
+Isomers:
+    CH4(42)                                               -84.435 kJ/mol
+Reactant channels:
+    H(7) + [CH3](10)                                      347.186 kJ/mol
+Product channels:
+    CH2(S)(13) + H2(49)                                   410.487 kJ/mol
+Path reactions:
+    H(7) + [CH3](10) <=> CH4(42)                          348.316 kJ/mol
+    CH2(S)(13) + H2(49) <=> CH4(42)                       410.487 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 30 network...
+Using 715 grains from -84.44 to 1409.25 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for CH2(S)(13) + H2(49) <=> CH4(42)...
+Using 286 grains from -84.44 to 511.78 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 290 grains from -84.44 to 520.15 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 298 grains from -84.44 to 536.89 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 313 grains from -84.44 to 568.27 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 341 grains from -84.44 to 626.84 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 397 grains from -84.44 to 744.00 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 509 grains from -84.44 to 978.30 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 677 grains from -84.44 to 1329.76 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+Updating PDepNetwork #31
+========================================================================
+31 network information
+----------------------
+Isomers:
+    C[CH2](5)                                             108.526 kJ/mol
+Reactant channels:
+    H(7) + C=C(16)                                        253.954 kJ/mol
+Product channels:
+Path reactions:
+    H(7) + C=C(16) <=> C[CH2](5)                           258.18 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 31 network...
+Using 1148 grains from 108.53 to 1257.50 kJ/mol in steps of 1.00 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + C=C(16) <=> C[CH2](5)...
+Using 250 grains from 108.53 to 358.82 kJ/mol in steps of 1.01 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from 108.53 to 366.14 kJ/mol in steps of 1.03 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from 108.53 to 382.90 kJ/mol in steps of 1.10 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from 108.53 to 414.62 kJ/mol in steps of 1.23 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 250 grains from 108.53 to 474.04 kJ/mol in steps of 1.47 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 250 grains from 108.53 to 590.77 kJ/mol in steps of 1.94 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 344 grains from 108.53 to 826.08 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 512 grains from 108.53 to 1177.54 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 2 new edge reactions
+    H(7) + [CH3](10) => CH4(42)
+    H(7) + [CH3](10) => CH2(S)(13) + H2(49)
+
+After model enlargement:
+    The model core has 12 species and 6 reactions
+    The model edge has 41 species and 195 reactions
+
+
+Updating 0 modified unimolecular reaction networks (out of 32)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 12 species and 6 reactions
+    The model edge has 41 species and 195 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 6 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 6 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:48
+    Memory used: 624.32 MB
+
+Conducting simulation of reaction system 2...
+At time 4.2994e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9901    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 32)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 12 species and 6 reactions
+    The model edge has 41 species and 195 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 6 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 6 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:48
+    Memory used: 624.43 MB
+
+Conducting simulation of reaction system 1...
+At time 2.1353e-05 s, species H2(49) at 0.100836370706 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 2.1353e-05 s, species H2(49) at rate ratio 0.100836370706 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species H2(49) to model core
+Exploring isomer H2(49) in pressure-dependent network #32
+Updating 1 modified unimolecular reaction networks (out of 32)...
+Updating PDepNetwork #32
+========================================================================
+32 network information
+----------------------
+Isomers:
+    H2(49)                                               -8.60349 kJ/mol
+Reactant channels:
+    H(7) + H(7)                                           423.609 kJ/mol
+Product channels:
+Path reactions:
+    H(7) + H(7) <=> H2(49)                                429.885 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 32 network...
+Using 688 grains from -8.60 to 1428.60 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + H(7) <=> H2(49)...
+Using 259 grains from -8.60 to 531.13 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 263 grains from -8.60 to 539.50 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 271 grains from -8.60 to 556.24 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 286 grains from -8.60 to 587.62 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 314 grains from -8.60 to 646.19 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 370 grains from -8.60 to 763.34 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 482 grains from -8.60 to 997.65 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 650 grains from -8.60 to 1349.10 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    H2(49)
+Created 0 new edge species
+Moved 1 reactions from edge to core
+    C[CH2](5) + H(7) <=> H2(49) + C=C(16)
+Added 1 new core reactions
+    H(7) + H(7) <=> H2(49)
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 13 species and 8 reactions
+    The model edge has 40 species and 194 reactions
+
+
+Generating kinetics for new reactions...
+Updating 1 modified unimolecular reaction networks (out of 33)...
+Updating PDepNetwork #33
+========================================================================
+33 network information
+----------------------
+Isomers:
+    H2(49)                                               -8.60349 kJ/mol
+Reactant channels:
+    H(7) + H(7)                                           423.609 kJ/mol
+Product channels:
+Path reactions:
+    H(7) + H(7) <=> H2(49)                                429.885 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 33 network...
+Using 688 grains from -8.60 to 1428.60 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + H(7) <=> H2(49)...
+Using 259 grains from -8.60 to 531.13 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 263 grains from -8.60 to 539.50 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 271 grains from -8.60 to 556.24 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 286 grains from -8.60 to 587.62 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 314 grains from -8.60 to 646.19 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 370 grains from -8.60 to 763.34 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 482 grains from -8.60 to 997.65 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 650 grains from -8.60 to 1349.10 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 5 new edge reactions
+    H(7) + CCCCC(28) <=> [CH2]CCCC(4) + H2(49)
+    H(7) + CC(30) <=> C[CH2](5) + H2(49)
+    H(7) + CCCC(31) <=> H2(49) + [CH2]CCC(2)
+    H(7) + CCC(41) <=> [CH2]CC(3) + H2(49)
+    H(7) + CH4(42) <=> [CH3](10) + H2(49)
+
+After model enlargement:
+    The model core has 13 species and 8 reactions
+    The model edge has 40 species and 199 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 8 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 8 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:56
+    Memory used: 621.71 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3161e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9903    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 33)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 13 species and 8 reactions
+    The model edge has 40 species and 199 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 8 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 8 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:03:57
+    Memory used: 621.72 MB
+
+Conducting simulation of reaction system 1...
+At time 2.7567e-05 s, PDepNetwork #17 at 0.102513891437 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 2.7567e-05 s, PDepNetwork #17 at 0.102513891437 exceeded the minimum rate for exploring of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Exploring isomer CC(30) in pressure-dependent network #17
+Generating kinetics for new reactions...
+For reaction CH2(S)(13) + CH4(42) <=> CC(30) Ea raised from -1.5 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 33)...
+Updating PDepNetwork #17
+Warning: For CC, more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (6 frequencies) to compensate.
+Warning: Maximum number of iterations reached when fitting spectral data for CC.
+========================================================================
+17 network information
+----------------------
+Isomers:
+    CC(30)                                               -96.7435 kJ/mol
+Reactant channels:
+    [CH3](10) + [CH3](10)                                 270.763 kJ/mol
+    C[CH2](5) + H(7)                                      320.331 kJ/mol
+Product channels:
+    CH2(S)(13) + CH4(42)                                  334.656 kJ/mol
+Path reactions:
+    [CH3](10) + [CH3](10) <=> CC(30)                      271.328 kJ/mol
+    C[CH2](5) + H(7) <=> CC(30)                           320.331 kJ/mol
+    CH2(S)(13) + CH4(42) <=> CC(30)                       334.656 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 17 network...
+Using 685 grains from -96.74 to 1334.18 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for CH2(S)(13) + CH4(42) <=> CC(30)...
+Using 256 grains from -96.74 to 436.72 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 259 grains from -96.74 to 442.99 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 267 grains from -96.74 to 459.73 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 282 grains from -96.74 to 491.11 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 311 grains from -96.74 to 551.78 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 367 grains from -96.74 to 668.93 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 479 grains from -96.74 to 903.23 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 647 grains from -96.74 to 1254.69 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 1 new core reactions
+    [CH3](10) + [CH3](10) <=> C[CH2](5) + H(7)
+Created 2 new edge reactions
+    [CH3](10) + [CH3](10) => CC(30)
+    [CH3](10) + [CH3](10) => CH2(S)(13) + CH4(42)
+
+After model enlargement:
+    The model core has 13 species and 9 reactions
+    The model edge has 40 species and 201 reactions
+
+
+Updating 0 modified unimolecular reaction networks (out of 33)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 13 species and 9 reactions
+    The model edge has 40 species and 201 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 9 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 9 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:03
+    Memory used: 621.74 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3158e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9903    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 33)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 13 species and 9 reactions
+    The model edge has 40 species and 201 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 9 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 9 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:03
+    Memory used: 621.78 MB
+
+Conducting simulation of reaction system 1...
+At time 4.0531e-05 s, species [CH]=C(43) at 0.102432601886 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 4.0531e-05 s, species [CH]=C(43) at rate ratio 0.102432601886 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species [CH]=C(43) to model core
+Updating 0 modified unimolecular reaction networks (out of 33)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    [CH]=C(43)
+Created 0 new edge species
+Moved 3 reactions from edge to core
+    C[CH2](5) + [CH]=C(43) <=> C=C(16) + C=C(16)
+    C=C(16) <=> H(7) + [CH]=C(43)
+    H(7) + C=C(16) <=> H2(49) + [CH]=C(43)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 14 species and 12 reactions
+    The model edge has 39 species and 198 reactions
+
+
+Generating kinetics for new reactions...
+For reaction H(7) + [CH]=[CH](51) <=> [CH]=C(43) Ea raised from -1.4 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 42)...
+Updating PDepNetwork #34
+Warning: For C#C, more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (1 frequencies) to compensate.
+Warning: For [CH]=[CH], more characteristic frequencies were generated than vibrational modes allowed. Removed 2 groups (2 frequencies) to compensate.
+Warning: Statmech node 'C_R2' and all its parents have data = None
+========================================================================
+34 network information
+----------------------
+Isomers:
+    [CH]=C(43)                                            289.245 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + C#C(50)                                        426.597 kJ/mol
+    H(7) + [CH]=[CH](51)                                  748.146 kJ/mol
+    H(7) + [C]=C(52)                                      812.056 kJ/mol
+Path reactions:
+    H(7) + C#C(50) <=> [CH]=C(43)                         435.425 kJ/mol
+    H(7) + [CH]=[CH](51) <=> [CH]=C(43)                   748.146 kJ/mol
+    H(7) + [C]=C(52) <=> [CH]=C(43)                       812.056 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 34 network...
+Using 728 grains from 289.25 to 1810.13 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [C]=C(52) <=> [CH]=C(43)...
+Using 300 grains from 289.25 to 914.75 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 303 grains from 289.25 to 921.03 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 311 grains from 289.25 to 937.76 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 326 grains from 289.25 to 969.14 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 355 grains from 289.25 to 1029.81 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 410 grains from 289.25 to 1144.87 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 523 grains from 289.25 to 1381.27 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 690 grains from 289.25 to 1730.63 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 6 new edge species
+    C#C(50)
+    [CH]=[CH](51)
+    [C]=C(52)
+    C=CCCCCC(53)
+    C=CCCCC(54)
+    C=CC=C(55)
+Added 0 new core reactions
+Created 60 new edge reactions
+    C[CH]CCCCC(11) + [CH]C(29) <=> n-heptane(1) + [CH]=C(43)
+    CC[CH]CCCC(6) + [CH]C(29) <=> n-heptane(1) + [CH]=C(43)
+    CCC[CH]CCC(8) + [CH]C(29) <=> n-heptane(1) + [CH]=C(43)
+    [CH2]CCCCCC(12) + [CH]C(29) <=> n-heptane(1) + [CH]=C(43)
+    n-heptane(1) + [CH]=C(43) <=> CC[CH]CCCC(6) + C=C(16)
+    n-heptane(1) + [CH]=C(43) <=> CCC[CH]CCC(8) + C=C(16)
+    n-heptane(1) + [CH]=C(43) <=> C[CH]CCCCC(11) + C=C(16)
+    n-heptane(1) + [CH]=C(43) <=> [CH2]CCCCCC(12) + C=C(16)
+    [CH2]CCCC(4) + [CH]=C(43) <=> C#C(50) + CCCCC(28)
+    [CH2]CCCC(4) + [CH]=C(43) <=> C=C(16) + C=CCCC(15)
+    [CH]C(29) + [CH]CCCC(27) <=> [CH2]CCCC(4) + [CH]=C(43)
+    [CH]C(29) + [CH2]CC[CH]C(23) <=> [CH2]CCCC(4) + [CH]=C(43)
+    [CH2]C[CH]CC(21) + [CH]C(29) <=> [CH2]CCCC(4) + [CH]=C(43)
+    [CH]C(29) + [CH2][CH]CCC(24) <=> [CH2]CCCC(4) + [CH]=C(43)
+    [CH]C(29) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) + [CH]=C(43)
+    C=C(16) + [CH]CCCC(27) <=> [CH2]CCCC(4) + [CH]=C(43)
+    [CH2]CCCC(4) + [CH]=C(43) <=> C=C(16) + [CH2]C[CH]CC(21)
+    [CH2]CCCC(4) + [CH]=C(43) <=> C=C(16) + [CH2]CC[CH]C(23)
+    [CH2]CCCC(4) + [CH]=C(43) <=> C=C(16) + [CH2]CCC[CH2](25)
+    [C]=C(52) + CCCCC(28) <=> [CH2]CCCC(4) + [CH]=C(43)
+    C[CH2](5) + [CH]=C(43) <=> C#C(50) + CC(30)
+    [CH]C(29) + [CH]C(29) <=> C[CH2](5) + [CH]=C(43)
+    [CH]C(29) + [CH2][CH2](20) <=> C[CH2](5) + [CH]=C(43)
+    C=C(16) + [CH]C(29) <=> C[CH2](5) + [CH]=C(43)
+    [C]=C(52) + CC(30) <=> C[CH2](5) + [CH]=C(43)
+    [CH]=C(43) + [CH2]CCC(2) <=> CCCC(31) + C#C(50)
+    [CH]=C(43) + [CH2]CCC(2) <=> C=C(16) + C=CCC(32)
+    [CH]CCC(36) + [CH]C(29) <=> [CH]=C(43) + [CH2]CCC(2)
+    [CH2]C[CH]C(34) + [CH]C(29) <=> [CH]=C(43) + [CH2]CCC(2)
+    [CH2][CH]CC(35) + [CH]C(29) <=> [CH]=C(43) + [CH2]CCC(2)
+    [CH]C(29) + [CH2]CC[CH2](22) <=> [CH]=C(43) + [CH2]CCC(2)
+    [CH]CCC(36) + C=C(16) <=> [CH]=C(43) + [CH2]CCC(2)
+    [CH]=C(43) + [CH2]CCC(2) <=> [CH2]C[CH]C(34) + C=C(16)
+    [CH]=C(43) + [CH2]CCC(2) <=> C=C(16) + [CH2]CC[CH2](22)
+    [C]=C(52) + CCCC(31) <=> [CH]=C(43) + [CH2]CCC(2)
+    [CH2]CC(3) + [CH]=C(43) <=> CCC(41) + C#C(50)
+    [CH2]CC(3) + [CH]=C(43) <=> C=C(16) + C=CC(37)
+    [CH]CC(40) + [CH]C(29) <=> [CH2]CC(3) + [CH]=C(43)
+    [CH2][CH]C(39) + [CH]C(29) <=> [CH2]CC(3) + [CH]=C(43)
+    [CH]C(29) + [CH2]C[CH2](19) <=> [CH2]CC(3) + [CH]=C(43)
+    [CH]CC(40) + C=C(16) <=> [CH2]CC(3) + [CH]=C(43)
+    [CH2]CC(3) + [CH]=C(43) <=> C=C(16) + [CH2]C[CH2](19)
+    CCC(41) + [C]=C(52) <=> [CH2]CC(3) + [CH]=C(43)
+    [CH3](10) + [CH]=C(43) <=> CH4(42) + C#C(50)
+    [CH]C(29) + CH2(T)(26) <=> [CH3](10) + [CH]=C(43)
+    C=C(16) + CH2(T)(26) <=> [CH3](10) + [CH]=C(43)
+    [C]=C(52) + CH4(42) <=> [CH3](10) + [CH]=C(43)
+    [CH]=C(43) + [CH]C(29) <=> [CH]=C(43) + C=C(16)
+    C[CH2](5) + [C]=C(52) <=> [CH]=C(43) + C=C(16)
+    C[CH2](5) + [CH]=[CH](51) <=> [CH]=C(43) + C=C(16)
+    H(7) + [CH]=C(43) <=> H2(49) + C#C(50)
+    H2(49) + [C]=C(52) <=> H(7) + [CH]=C(43)
+    H(7) + [CH]C(29) <=> H2(49) + [CH]=C(43)
+    [CH]=C(43) + [CH]=C(43) <=> C#C(50) + C=C(16)
+    [C]=C(52) + [CH]C(29) <=> [CH]=C(43) + [CH]=C(43)
+    [CH]=[CH](51) + [CH]C(29) <=> [CH]=C(43) + [CH]=C(43)
+    [C]=C(52) + C=C(16) <=> [CH]=C(43) + [CH]=C(43)
+    [CH]=C(43) => H(7) + C#C(50)
+    [CH]=C(43) => H(7) + [CH]=[CH](51)
+    [CH]=C(43) => H(7) + [C]=C(52)
+
+After model enlargement:
+    The model core has 14 species and 12 reactions
+    The model edge has 45 species and 258 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 12 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 12 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:10
+    Memory used: 636.13 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3231e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9903    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 42)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 14 species and 12 reactions
+    The model edge has 45 species and 258 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 12 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 12 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:10
+    Memory used: 636.34 MB
+
+Conducting simulation of reaction system 1...
+At time 3.6954e-05 s, species C#C(50) at 0.102981127098 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 3.6954e-05 s, species C#C(50) at rate ratio 0.102981127098 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species C#C(50) to model core
+Exploring isomer C=C(16) in pressure-dependent network #41
+Updating 1 modified unimolecular reaction networks (out of 42)...
+Updating PDepNetwork #41
+========================================================================
+41 network information
+----------------------
+Isomers:
+    C=C(16)                                               42.1493 kJ/mol
+Reactant channels:
+    H(7) + [CH]=C(43)                                      501.05 kJ/mol
+Product channels:
+Path reactions:
+    H(7) + [CH]=C(43) <=> C=C(16)                          501.05 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 41 network...
+Using 698 grains from 42.15 to 1500.27 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [CH]=C(43) <=> C=C(16)...
+Using 269 grains from 42.15 to 602.81 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 272 grains from 42.15 to 609.08 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 280 grains from 42.15 to 625.82 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 296 grains from 42.15 to 659.29 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 324 grains from 42.15 to 717.87 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 380 grains from 42.15 to 835.02 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 492 grains from 42.15 to 1069.32 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 660 grains from 42.15 to 1420.78 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    C#C(50)
+Created 0 new edge species
+Moved 3 reactions from edge to core
+    H(7) + [CH]=C(43) <=> H2(49) + C#C(50)
+    [CH]=C(43) + [CH]=C(43) <=> C#C(50) + C=C(16)
+    [CH]=C(43) <=> H(7) + C#C(50)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 44 species and 255 reactions
+
+
+Generating kinetics for new reactions...
+Updating 1 modified unimolecular reaction networks (out of 52)...
+Updating PDepNetwork #43
+Warning: Statmech node 'CtCr' and all its parents have data = None
+Warning: Statmech node 'C_R0' and all its parents have data = None
+========================================================================
+43 network information
+----------------------
+Isomers:
+    C#C(50)                                               214.792 kJ/mol
+Reactant channels:
+Product channels:
+    H(7) + [C]#C(56)                                      763.741 kJ/mol
+    [C]=C(57)                                             400.446 kJ/mol
+Path reactions:
+    H(7) + [C]#C(56) <=> C#C(50)                          763.741 kJ/mol
+    [C]=C(57) <=> C#C(50)                                 434.525 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 43 network...
+Using 741 grains from 214.79 to 1762.87 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for [C]=C(57) <=> C#C(50)...
+Using 312 grains from 214.79 to 865.40 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 316 grains from 214.79 to 873.77 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 324 grains from 214.79 to 890.51 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 339 grains from 214.79 to 921.89 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 367 grains from 214.79 to 980.46 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 423 grains from 214.79 to 1097.62 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 535 grains from 214.79 to 1331.92 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 703 grains from 214.79 to 1683.38 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 10 new edge species
+    [C]#C(56)
+    [C]=C(57)
+    [CH]=CCCCCC(58)
+    [CH]=CCC(59)
+    [CH]=CCCCC(60)
+    [CH]=CCCC(61)
+    [CH]=CC(62)
+    [CH]=CC[CH2](63)
+    [CH]=CC=C(64)
+    [CH]=CC=[CH](65)
+Added 0 new core reactions
+Created 33 new edge reactions
+    C[CH]CCCCC(11) + [CH]=C(43) <=> n-heptane(1) + C#C(50)
+    CC[CH]CCCC(6) + [CH]=C(43) <=> n-heptane(1) + C#C(50)
+    CCC[CH]CCC(8) + [CH]=C(43) <=> n-heptane(1) + C#C(50)
+    [CH2]CCCCCC(12) + [CH]=C(43) <=> n-heptane(1) + C#C(50)
+    [CH]=C(43) + [CH]CCCC(27) <=> [CH2]CCCC(4) + C#C(50)
+    [CH]=C(43) + [CH2]CC[CH]C(23) <=> [CH2]CCCC(4) + C#C(50)
+    [CH]=C(43) + [CH2]C[CH]CC(21) <=> [CH2]CCCC(4) + C#C(50)
+    [CH]=C(43) + [CH2][CH]CCC(24) <=> [CH2]CCCC(4) + C#C(50)
+    [CH]=C(43) + [CH2]CCC[CH2](25) <=> [CH2]CCCC(4) + C#C(50)
+    [C]#C(56) + CCCCC(28) <=> [CH2]CCCC(4) + C#C(50)
+    [CH]=C(43) + [CH]C(29) <=> C[CH2](5) + C#C(50)
+    [CH]=C(43) + [CH2][CH2](20) <=> C[CH2](5) + C#C(50)
+    [C]#C(56) + CC(30) <=> C[CH2](5) + C#C(50)
+    [CH]=C(43) + [CH]CCC(36) <=> C#C(50) + [CH2]CCC(2)
+    [CH]=C(43) + [CH2]C[CH]C(34) <=> C#C(50) + [CH2]CCC(2)
+    [CH]=C(43) + [CH2][CH]CC(35) <=> C#C(50) + [CH2]CCC(2)
+    [CH]=C(43) + [CH2]CC[CH2](22) <=> C#C(50) + [CH2]CCC(2)
+    [C]#C(56) + CCCC(31) <=> C#C(50) + [CH2]CCC(2)
+    [CH]CC(40) + [CH]=C(43) <=> [CH2]CC(3) + C#C(50)
+    [CH]=C(43) + [CH2][CH]C(39) <=> [CH2]CC(3) + C#C(50)
+    [CH]=C(43) + [CH2]C[CH2](19) <=> [CH2]CC(3) + C#C(50)
+    [C]#C(56) + CCC(41) <=> [CH2]CC(3) + C#C(50)
+    [CH]=C(43) + CH2(T)(26) <=> [CH3](10) + C#C(50)
+    [C]#C(56) + CH4(42) <=> [CH3](10) + C#C(50)
+    C[CH2](5) + [C]#C(56) <=> C#C(50) + C=C(16)
+    [C]#C(56) + H2(49) <=> H(7) + C#C(50)
+    [CH]=C(43) + [C]=C(52) <=> [CH]=C(43) + C#C(50)
+    [CH]=C(43) + [CH]=[CH](51) <=> [CH]=C(43) + C#C(50)
+    [C]#C(56) + [CH]C(29) <=> [CH]=C(43) + C#C(50)
+    [C]#C(56) + C=C(16) <=> [CH]=C(43) + C#C(50)
+    [C]#C(56) + [CH]=C(43) <=> C#C(50) + C#C(50)
+    C#C(50) => H(7) + [C]#C(56)
+    C#C(50) => [C]=C(57)
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 54 species and 288 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:20
+    Memory used: 637.46 MB
+
+Conducting simulation of reaction system 2...
+At time 1.2454e-06 s, PDepNetwork #49 at 0.108004484497 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 1.2454e-06 s, PDepNetwork #49 at 0.108004484497 exceeded the minimum rate for exploring of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Exploring isomer [CH]=CC[CH2](63) in pressure-dependent network #49
+Exploring isomer [CH]=C(43) in pressure-dependent network #50
+Generating kinetics for new reactions...
+For reaction [CH]=[CH](51) + [CH2][CH2](20) <=> [CH]=CC[CH2](63) Ea raised from -15.6 to -15.6 kJ/mol.
+For reaction [CH]=[CH](51) + [CH2][CH2](20) <=> [CH]=CC[CH2](63) Ea raised from -15.6 to 0 kJ/mol.
+For reaction [CH]C=C[CH2](71) + H(7) <=> [CH]=CC[CH2](63) Ea raised from -1.4 to 0 kJ/mol.
+For reaction H(7) + [CH]=[C]C[CH2](72) <=> [CH]=CC[CH2](63) Ea raised from -1.4 to 0 kJ/mol.
+Updating 2 modified unimolecular reaction networks (out of 52)...
+Updating PDepNetwork #49
+Warning: Maximum number of iterations reached when fitting spectral data for C#CC[CH2].
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+Warning: Maximum number of iterations reached when fitting spectral data for [CH]=[C]C[CH2].
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+Warning: Statmech node 'C_R2' and all its parents have data = None
+========================================================================
+49 network information
+----------------------
+Isomers:
+    [CH]=CC[CH2](63)                                      435.821 kJ/mol
+Reactant channels:
+    C#C(50) + C=C(16)                                     256.942 kJ/mol
+Product channels:
+    H(7) + [CH]=CC=C(64)                                  552.822 kJ/mol
+    C#CC[CH2](66) + H(7)                                  566.633 kJ/mol
+    [CH]=[CH](51) + C=C(16)                               578.491 kJ/mol
+    C#C(50) + [CH2][CH2](20)                              528.589 kJ/mol
+    [CH]C=CC(67)                                          340.783 kJ/mol
+    [CH2]C[C]=C(68)                                       426.566 kJ/mol
+    [CH]=[C]CC(69)                                        468.416 kJ/mol
+    [CH2]C=C[CH2](70)                                     273.096 kJ/mol
+    [CH]=[CH](51) + [CH2][CH2](20)                        850.138 kJ/mol
+    [CH]C=C[CH2](71) + H(7)                               704.086 kJ/mol
+    H(7) + [CH]=[C]C[CH2](72)                             885.467 kJ/mol
+    C=CC=C(55)                                            93.9212 kJ/mol
+    C1=CCC1(73)                                           144.468 kJ/mol
+    [CH]C=C(74) + CH2(T)(26)                              758.178 kJ/mol
+    H(7) + [CH]CC=[CH](75)                                890.594 kJ/mol
+    H(7) + [C]=CC[CH2](76)                                958.631 kJ/mol
+Path reactions:
+    [CH]=CC[CH2](63) <=> C#C(50) + C=C(16)                435.821 kJ/mol
+    H(7) + [CH]=CC=C(64) <=> [CH]=CC[CH2](63)             560.909 kJ/mol
+    C#CC[CH2](66) + H(7) <=> [CH]=CC[CH2](63)              587.18 kJ/mol
+    [CH]=[CH](51) + C=C(16) <=> [CH]=CC[CH2](63)          599.952 kJ/mol
+    C#C(50) + [CH2][CH2](20) <=> [CH]=CC[CH2](63)          556.06 kJ/mol
+    [CH]C=CC(67) <=> [CH]=CC[CH2](63)                     540.778 kJ/mol
+    [CH]=CC[CH2](63) <=> [CH2]C[C]=C(68)                  541.258 kJ/mol
+    [CH]=[C]CC(69) <=> [CH]=CC[CH2](63)                   620.295 kJ/mol
+    [CH]=CC[CH2](63) <=> [CH2]C=C[CH2](70)                 627.95 kJ/mol
+    [CH]=[CH](51) + [CH2][CH2](20) <=> [CH]=CC[CH2](63)      850.138 kJ/mol
+    [CH]C=C[CH2](71) + H(7) <=> [CH]=CC[CH2](63)          704.086 kJ/mol
+    H(7) + [CH]=[C]C[CH2](72) <=> [CH]=CC[CH2](63)        885.467 kJ/mol
+    [CH]=CC[CH2](63) <=> C=CC=C(55)                       499.221 kJ/mol
+    [CH]=CC[CH2](63) <=> C1=CCC1(73)                      444.105 kJ/mol
+    [CH]C=C(74) + CH2(T)(26) <=> [CH]=CC[CH2](63)         792.494 kJ/mol
+    H(7) + [CH]CC=[CH](75) <=> [CH]=CC[CH2](63)           890.594 kJ/mol
+    H(7) + [C]=CC[CH2](76) <=> [CH]=CC[CH2](63)           958.631 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 49 network...
+Using 892 grains from 93.92 to 1957.89 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [C]=CC[CH2](76) <=> [CH]=CC[CH2](63)...
+Using 463 grains from 93.92 to 1060.42 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 466 grains from 93.92 to 1066.70 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 474 grains from 93.92 to 1083.44 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 490 grains from 93.92 to 1116.91 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 518 grains from 93.92 to 1175.49 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 574 grains from 93.92 to 1292.64 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 686 grains from 93.92 to 1526.94 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 854 grains from 93.92 to 1878.40 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+Updating PDepNetwork #50
+========================================================================
+50 network information
+----------------------
+Isomers:
+    [CH]=C(43)                                            289.245 kJ/mol
+Reactant channels:
+    H(7) + C#C(50)                                        426.597 kJ/mol
+Product channels:
+Path reactions:
+    H(7) + C#C(50) <=> [CH]=C(43)                         435.425 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 50 network...
+Using 1160 grains from 289.25 to 1434.07 kJ/mol in steps of 0.99 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + C#C(50) <=> [CH]=C(43)...
+Using 250 grains from 289.25 to 536.07 kJ/mol in steps of 0.99 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from 289.25 to 543.39 kJ/mol in steps of 1.02 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from 289.25 to 560.14 kJ/mol in steps of 1.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from 289.25 to 591.86 kJ/mol in steps of 1.22 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 250 grains from 289.25 to 651.29 kJ/mol in steps of 1.45 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 250 grains from 289.25 to 768.01 kJ/mol in steps of 1.92 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 343 grains from 289.25 to 1004.71 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 510 grains from 289.25 to 1354.07 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 0 new core species
+Created 11 new edge species
+    C#CC[CH2](66)
+    [CH]C=CC(67)
+    [CH2]C[C]=C(68)
+    [CH]=[C]CC(69)
+    [CH2]C=C[CH2](70)
+    [CH]C=C[CH2](71)
+    [CH]=[C]C[CH2](72)
+    C1=CCC1(73)
+    [CH]C=C(74)
+    [CH]CC=[CH](75)
+    [C]=CC[CH2](76)
+Added 0 new core reactions
+Created 17 new edge reactions
+    C#C(50) + C=C(16) => [CH]=CC[CH2](63)
+    C#C(50) + C=C(16) => H(7) + [CH]=CC=C(64)
+    C#C(50) + C=C(16) => C#CC[CH2](66) + H(7)
+    C#C(50) + C=C(16) => [CH]=[CH](51) + C=C(16)
+    C#C(50) + C=C(16) => C#C(50) + [CH2][CH2](20)
+    C#C(50) + C=C(16) => [CH]C=CC(67)
+    C#C(50) + C=C(16) => [CH2]C[C]=C(68)
+    C#C(50) + C=C(16) => [CH]=[C]CC(69)
+    C#C(50) + C=C(16) => [CH2]C=C[CH2](70)
+    C#C(50) + C=C(16) => [CH]=[CH](51) + [CH2][CH2](20)
+    C#C(50) + C=C(16) => [CH]C=C[CH2](71) + H(7)
+    C#C(50) + C=C(16) => H(7) + [CH]=[C]C[CH2](72)
+    C#C(50) + C=C(16) => C=CC=C(55)
+    C#C(50) + C=C(16) => C1=CCC1(73)
+    C#C(50) + C=C(16) => [CH]C=C(74) + CH2(T)(26)
+    C#C(50) + C=C(16) => H(7) + [CH]CC=[CH](75)
+    C#C(50) + C=C(16) => H(7) + [C]=CC[CH2](76)
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 65 species and 305 reactions
+
+
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 65 species and 305 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:36
+    Memory used: 617.86 MB
+
+Conducting simulation of reaction system 1...
+At time 1.9071e-05 s, PDepNetwork #52 at 0.11460423892 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 1.9071e-05 s, PDepNetwork #52 at 0.11460423892 exceeded the minimum rate for exploring of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Exploring isomer [CH]=CC=[CH](65) in pressure-dependent network #52
+Generating kinetics for new reactions...
+For reaction [CH]=[CH](51) + [CH]=[CH](51) <=> [CH]=CC=[CH](65) Ea raised from -15.6 to -15.6 kJ/mol.
+For reaction [CH]=[CH](51) + [CH]=[CH](51) <=> [CH]=CC=[CH](65) Ea raised from -15.6 to 0 kJ/mol.
+For reaction H(7) + [CH]C=C=[CH](80) <=> [CH]=CC=[CH](65) Ea raised from -1.4 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 52)...
+Updating PDepNetwork #52
+Warning: For [CH]=CC=[CH], more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (1 frequencies) to compensate.
+Warning: For [CH]=CC#C, more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (1 frequencies) to compensate.
+Warning: Statmech node 'RsCHrr' and all its parents have data = None
+Warning: Statmech node 'C_R2' and all its parents have data = None
+========================================================================
+52 network information
+----------------------
+Isomers:
+    [CH]=CC=[CH](65)                                      588.114 kJ/mol
+Reactant channels:
+    C#C(50) + C#C(50)                                     429.585 kJ/mol
+Product channels:
+    H(7) + [CH]=CC#C(77)                                  729.608 kJ/mol
+    C#C(50) + [CH]=[CH](51)                               751.134 kJ/mol
+    [CH]C=C=C(78)                                         517.387 kJ/mol
+    [CH]=C=C[CH2](79)                                     452.678 kJ/mol
+    [CH]=[CH](51) + [CH]=[CH](51)                         1072.68 kJ/mol
+    H(7) + [CH]C=C=[CH](80)                               883.668 kJ/mol
+    C1=CC=C1(81)                                          423.524 kJ/mol
+    H(7) + [C]=CC=[CH](82)                                1110.92 kJ/mol
+Path reactions:
+    [CH]=CC=[CH](65) <=> C#C(50) + C#C(50)                588.114 kJ/mol
+    H(7) + [CH]=CC#C(77) <=> [CH]=CC=[CH](65)             752.564 kJ/mol
+    C#C(50) + [CH]=[CH](51) <=> [CH]=CC=[CH](65)          778.605 kJ/mol
+    [CH]=CC=[CH](65) <=> [CH]C=C=C(78)                    756.072 kJ/mol
+    [CH]=CC=[CH](65) <=> [CH]=C=C[CH2](79)                780.242 kJ/mol
+    [CH]=[CH](51) + [CH]=[CH](51) <=> [CH]=CC=[CH](65)      1072.68 kJ/mol
+    H(7) + [CH]C=C=[CH](80) <=> [CH]=CC=[CH](65)          883.668 kJ/mol
+    [CH]=CC=[CH](65) <=> C1=CC=C1(81)                     596.398 kJ/mol
+    H(7) + [C]=CC=[CH](82) <=> [CH]=CC=[CH](65)           1110.92 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 52 network...
+Using 807 grains from 423.52 to 2109.68 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for H(7) + [C]=CC=[CH](82) <=> [CH]=CC=[CH](65)...
+Using 378 grains from 423.52 to 1212.21 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 382 grains from 423.52 to 1220.58 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 390 grains from 423.52 to 1237.31 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 405 grains from 423.52 to 1268.69 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 433 grains from 423.52 to 1327.27 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 489 grains from 423.52 to 1444.42 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 601 grains from 423.52 to 1678.72 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 769 grains from 423.52 to 2030.18 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 0 new core species
+Created 6 new edge species
+    [CH]=CC#C(77)
+    [CH]C=C=C(78)
+    [CH]=C=C[CH2](79)
+    [CH]C=C=[CH](80)
+    C1=CC=C1(81)
+    [C]=CC=[CH](82)
+Added 0 new core reactions
+Created 8 new edge reactions
+    C#C(50) + C#C(50) => [CH]=CC=[CH](65)
+    C#C(50) + C#C(50) => H(7) + [CH]=CC#C(77)
+    C#C(50) + C#C(50) => C#C(50) + [CH]=[CH](51)
+    C#C(50) + C#C(50) => [CH]C=C=C(78)
+    C#C(50) + C#C(50) => [CH]=C=C[CH2](79)
+    C#C(50) + C#C(50) => H(7) + [CH]C=C=[CH](80)
+    C#C(50) + C#C(50) => C1=CC=C1(81)
+    C#C(50) + C#C(50) => H(7) + [C]=CC=[CH](82)
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 71 species and 313 reactions
+
+
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 71 species and 313 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:46
+    Memory used: 638.55 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3124e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9902    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 71 species and 313 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:47
+    Memory used: 638.66 MB
+
+Conducting simulation of reaction system 1...
+At time 5.3421e-05 s, PDepNetwork #39 at 0.106573344063 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 5.3421e-05 s, PDepNetwork #39 at 0.106573344063 exceeded the minimum rate for exploring of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Exploring isomer C=CC(37) in pressure-dependent network #39
+Generating kinetics for new reactions...
+For reaction CH2(S)(13) + C=C(16) <=> C=CC(37) Ea raised from -4.4 to 0 kJ/mol.
+Updating 1 modified unimolecular reaction networks (out of 52)...
+Updating PDepNetwork #39
+Warning: For [CH]=CC, more characteristic frequencies were generated than vibrational modes allowed. Removed 1 groups (1 frequencies) to compensate.
+Warning: Statmech node 'C_R0' and all its parents have data = None
+Warning: Statmech node 'C_R0' and all its parents have data = None
+========================================================================
+39 network information
+----------------------
+Isomers:
+    C=CC(37)                                              6.12372 kJ/mol
+Reactant channels:
+    [CH3](10) + [CH]=C(43)                                424.627 kJ/mol
+Product channels:
+    H(7) + [CH2]C=C(83)                                   369.428 kJ/mol
+    H(7) + C=[C]C(84)                                      455.77 kJ/mol
+    H(7) + [CH]=CC(62)                                    465.025 kJ/mol
+    [CH2]C[CH2](19)                                       289.969 kJ/mol
+    CH2(S)(13) + C=C(16)                                   461.24 kJ/mol
+    C[C]C(85)                                              308.14 kJ/mol
+    [CH]CC(86)                                            330.576 kJ/mol
+Path reactions:
+    [CH3](10) + [CH]=C(43) <=> C=CC(37)                   424.627 kJ/mol
+    H(7) + [CH2]C=C(83) <=> C=CC(37)                      369.946 kJ/mol
+    H(7) + C=[C]C(84) <=> C=CC(37)                         455.77 kJ/mol
+    H(7) + [CH]=CC(62) <=> C=CC(37)                       465.025 kJ/mol
+    [CH2]C[CH2](19) <=> C=CC(37)                           312.83 kJ/mol
+    CH2(S)(13) + C=C(16) <=> C=CC(37)                      461.24 kJ/mol
+    C[C]C(85) <=> C=CC(37)                                364.988 kJ/mol
+    [CH]CC(86) <=> C=CC(37)                               367.614 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 39 network...
+Using 698 grains from 6.12 to 1464.25 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for [CH]CC(86) <=> C=CC(37)...
+Using 269 grains from 6.12 to 566.78 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 272 grains from 6.12 to 573.06 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 280 grains from 6.12 to 589.79 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 296 grains from 6.12 to 623.26 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 324 grains from 6.12 to 681.84 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 380 grains from 6.12 to 798.99 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 492 grains from 6.12 to 1033.30 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 660 grains from 6.12 to 1384.75 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 0 new core species
+Created 4 new edge species
+    [CH2]C=C(83)
+    C=[C]C(84)
+    C[C]C(85)
+    [CH]CC(86)
+Added 0 new core reactions
+Created 8 new edge reactions
+    [CH3](10) + [CH]=C(43) => C=CC(37)
+    [CH3](10) + [CH]=C(43) => H(7) + [CH2]C=C(83)
+    [CH3](10) + [CH]=C(43) => H(7) + C=[C]C(84)
+    [CH3](10) + [CH]=C(43) => H(7) + [CH]=CC(62)
+    [CH3](10) + [CH]=C(43) => [CH2]C[CH2](19)
+    [CH3](10) + [CH]=C(43) => CH2(S)(13) + C=C(16)
+    [CH3](10) + [CH]=C(43) => C[C]C(85)
+    [CH3](10) + [CH]=C(43) => [CH]CC(86)
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 75 species and 321 reactions
+
+
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 75 species and 321 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:55
+    Memory used: 625.37 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3124e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9902    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 75 species and 321 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:55
+    Memory used: 625.39 MB
+
+Conducting simulation of reaction system 1...
+At time 5.3421e-05 s, PDepNetwork #39 at 0.100813866671 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 5.3421e-05 s, PDepNetwork #39 at 0.100813866671 exceeded the minimum rate for exploring of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Exploring isomer C[C]C(85) in pressure-dependent network #39
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 75 species and 321 reactions
+
+
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 75 species and 321 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:56
+    Memory used: 625.39 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3124e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9902    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 15 species and 15 reactions
+    The model edge has 75 species and 321 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 15 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 15 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:04:56
+    Memory used: 625.44 MB
+
+Conducting simulation of reaction system 1...
+At time 5.7285e-05 s, species C[C]C(85) at 0.105607407669 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 5.7285e-05 s, species C[C]C(85) at rate ratio 0.105607407669 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species C[C]C(85) to model core
+Updating 0 modified unimolecular reaction networks (out of 52)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    C[C]C(85)
+Created 0 new edge species
+Moved 1 reactions from edge to core
+    [CH3](10) + [CH]=C(43) <=> C[C]C(85)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 16 species and 16 reactions
+    The model edge has 74 species and 320 reactions
+
+
+Generating kinetics for new reactions...
+Updating 1 modified unimolecular reaction networks (out of 55)...
+Updating PDepNetwork #53
+========================================================================
+53 network information
+----------------------
+Isomers:
+    C[C]C(85)                                              308.14 kJ/mol
+Reactant channels:
+Product channels:
+    C=CC(37)                                              6.12372 kJ/mol
+Path reactions:
+    C[C]C(85) <=> C=CC(37)                                364.988 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 53 network...
+Using 739 grains from 6.12 to 1365.46 kJ/mol in steps of 1.84 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for C[C]C(85) <=> C=CC(37)...
+Using 250 grains from 6.12 to 465.63 kJ/mol in steps of 1.85 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 250 grains from 6.12 to 472.95 kJ/mol in steps of 1.87 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 250 grains from 6.12 to 489.70 kJ/mol in steps of 1.94 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 250 grains from 6.12 to 521.42 kJ/mol in steps of 2.07 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 276 grains from 6.12 to 581.42 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 332 grains from 6.12 to 698.58 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 444 grains from 6.12 to 932.88 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 612 grains from 6.12 to 1284.34 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 2 new edge species
+    CC1(C)CC1(87)
+    CC1(C)C=C1(88)
+Added 0 new core reactions
+Created 1 new edge reactions
+    C[C]C(85) => C=CC(37)
+
+After model enlargement:
+    The model core has 16 species and 16 reactions
+    The model edge has 76 species and 321 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 16 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 16 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:05:01
+    Memory used: 625.45 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3233e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9903    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 55)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 16 species and 16 reactions
+    The model edge has 76 species and 321 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 16 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 16 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:05:01
+    Memory used: 625.47 MB
+
+Conducting simulation of reaction system 1...
+At time 7.4507e-05 s, species CH4(42) at 0.10008259123 exceeded the minimum rate for simulation interruption of 0.1
+Reached max number of objects...preparing to terminate
+At time 7.4507e-05 s, species CH4(42) at rate ratio 0.10008259123 exceeded the minimum rate for moving to model core of 0.1
+terminating simulation due to interrupt...
+Making seed mechanism...
+
+
+Adding species CH4(42) to model core
+Updating 0 modified unimolecular reaction networks (out of 55)...
+
+
+Summary of Model Enlargement
+---------------------------------
+Added 1 new core species
+    CH4(42)
+Created 0 new edge species
+Moved 5 reactions from edge to core
+    C[CH2](5) + [CH3](10) <=> CH4(42) + C=C(16)
+    [CH]=C(43) + CH4(42) <=> [CH3](10) + C=C(16)
+    H(7) + [CH3](10) <=> CH4(42)
+    H(7) + CH4(42) <=> [CH3](10) + H2(49)
+    [CH3](10) + [CH]=C(43) <=> CH4(42) + C#C(50)
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 17 species and 21 reactions
+    The model edge has 75 species and 316 reactions
+
+
+Generating kinetics for new reactions...
+Updating 1 modified unimolecular reaction networks (out of 56)...
+Updating PDepNetwork #56
+========================================================================
+56 network information
+----------------------
+Isomers:
+    CH4(42)                                               -84.435 kJ/mol
+Reactant channels:
+    H(7) + [CH3](10)                                      347.186 kJ/mol
+Product channels:
+    CH2(S)(13) + H2(49)                                   410.487 kJ/mol
+Path reactions:
+    H(7) + [CH3](10) <=> CH4(42)                          348.316 kJ/mol
+    CH2(S)(13) + H2(49) <=> CH4(42)                       410.487 kJ/mol
+Net reactions:
+========================================================================
+
+Calculating densities of states for 56 network...
+Using 715 grains from -84.44 to 1409.25 kJ/mol in steps of 2.09 kJ/mol to compute densities of states
+Calculating phenomenological rate coefficients for CH2(S)(13) + H2(49) <=> CH4(42)...
+Using 286 grains from -84.44 to 511.78 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 302.617 K
+Using 290 grains from -84.44 to 520.15 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 324.619 K
+Using 298 grains from -84.44 to 536.89 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 374.997 K
+Using 313 grains from -84.44 to 568.27 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 470.374 K
+Using 341 grains from -84.44 to 626.84 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 649.057 K
+Using 397 grains from -84.44 to 744.00 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1000.02 K
+Using 509 grains from -84.44 to 978.30 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 1706.11 K
+Using 677 grains from -84.44 to 1329.76 kJ/mol in steps of 2.09 kJ/mol to compute the k(T,P) values at 2761.25 K
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 6 new edge reactions
+    [CH3](10) + CCCCC(28) <=> [CH2]CCCC(4) + CH4(42)
+    [CH3](10) + CC(30) <=> C[CH2](5) + CH4(42)
+    [CH3](10) + CCCC(31) <=> CH4(42) + [CH2]CCC(2)
+    [CH3](10) + CCC(41) <=> [CH2]CC(3) + CH4(42)
+    [CH3](10) + [CH]C(29) <=> [CH]=C(43) + CH4(42)
+    CH4(42) => CH2(S)(13) + H2(49)
+
+After model enlargement:
+    The model core has 17 species and 21 reactions
+    The model edge has 75 species and 322 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 21 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 21 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:05:08
+    Memory used: 602.26 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3260e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9904    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 56)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 17 species and 21 reactions
+    The model edge has 75 species and 322 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 21 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 21 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:05:08
+    Memory used: 602.33 MB
+
+Conducting simulation of reaction system 1...
+At time 9.6404e-05 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9903    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 56)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 17 species and 21 reactions
+    The model edge has 75 species and 322 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 21 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 21 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:05:09
+    Memory used: 602.39 MB
+
+Conducting simulation of reaction system 2...
+At time 4.3260e-06 s, reached target termination conversion: 0.990000 of n-heptane(1)
+    n-heptane(1) conversion: 0.9904    
+Making seed mechanism...
+
+
+Updating 0 modified unimolecular reaction networks (out of 56)...
+
+
+Summary of Secondary Model Edge Enlargement
+---------------------------------
+Added 0 new core species
+Created 0 new edge species
+Added 0 new core reactions
+Created 0 new edge reactions
+
+After model enlargement:
+    The model core has 17 species and 21 reactions
+    The model edge has 75 species and 322 reactions
+
+
+Saving current model core to Chemkin file...
+Chemkin file contains 21 reactions.
+Saving annotated version of Chemkin file...
+Chemkin file contains 21 reactions.
+Updating RMG execution statistics...
+    Execution time (DD:HH:MM:SS): 00:00:05:09
+    Memory used: 602.48 MB
+
+Performing final model checks...
+No collision rate violators found.
+
+MODEL GENERATION COMPLETED
+
+The final model core has 17 species and 21 reactions
+The final model edge has 75 species and 322 reactions
+
+"The decade of the most important thing is a player of the most
+ important thing that has ever been a lot of the last thing."
+             ---Quote-generating neural network, June 2019
+
+RMG execution terminated at Thu Jun  6 11:36:54 2019
